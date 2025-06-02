@@ -1,0 +1,122 @@
+﻿@model Pawfectmatch_V._1.Helpers.PaginatedList<Pawfectmatch_V._1.Models.Pet>
+
+@{
+    ViewData["Title"] = "Adopted Pets";
+    var pets = Model.ToList();
+}
+
+<h2 class="mb-4">Adopted Pets</h2>
+
+<partial name="_SearchAndFilter" />
+
+<div class="row" id="petList">
+    @foreach (var pet in pets)
+    {
+        <div class="col-12 col-sm-6 col-md-4 mb-4 pet-card"
+             data-name="@pet.Name.ToLower()"
+             data-breed="@pet.Breed.ToLower()"
+             data-age="@pet.Age"
+             data-released="@pet.DateOfRelease?.ToString("MMMM dd, yyyy")?.ToLower()"
+             data-microchip="@pet.MicrochipNumber?.ToLower()"
+             data-description="@pet.Description.ToLower()"
+             data-posted="@pet.DatePosted.ToString("MMMM dd, yyyy").ToLower()">
+
+            <div class="card shadow-sm h-100">
+                @if (!string.IsNullOrEmpty(pet.ImagePath))
+                {
+                    <div class="image-container d-flex justify-content-center align-items-center">
+                        <img src="@pet.ImagePath"
+                             class="img-fluid"
+                             alt="Pet Image" />
+                    </div>
+                }
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">@pet.Name</h5>
+                    <p class="card-text mb-3">
+                        <strong>Microchip #:</strong> @pet.MicrochipNumber<br />
+                        <strong>Type:</strong>
+                            @if (pet.PetType == "Cat")
+                            {
+                                <span class="badge bg-info text-dark"><i class="fas fa-cat"></i> Cat</span>
+                            }
+                            else if (pet.PetType == "Dog")
+                            {
+                                <span class="badge bg-warning text-dark"><i class="fas fa-dog"></i> Dog</span>
+                            }  <br />                        
+                        <strong>Breed:</strong> @pet.Breed<br />
+                        <strong>Age:</strong> @pet.Age<br />
+                        <strong>Gender:</strong> @pet.Gender<br />
+                        <strong>Description:</strong> @pet.Description <br />
+                        <strong>Date Posted:</strong> @pet.DatePosted.ToString("MMM dd, yyyy") <br />
+                        <strong>Claimed Date:</strong> @pet.DateOfRelease?.ToString("MMMM dd, yyyy | hh:mm tt")<br />
+
+
+                    </p>
+                    <span class="badge bg-success align-self-start">Adopted</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-route-page="@(Model.PageIndex - 1)">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        }
+
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            if (i == Model.PageIndex)
+            {
+                <li class="page-item active"><span class="page-link">@i</span></li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" asp-route-page="@i">@i</a></li>
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-route-page="@(Model.PageIndex + 1)">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled"><span class="page-link">Next</span></li>
+        }
+    </ul>
+</nav>
+
+
+
+<style>
+    .image-container {
+        width: 100%;
+        height: 250px;
+        background-color: #f8f9fa;
+        overflow: hidden;
+    }
+
+        .image-container img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+</style>
+
+
+@section Scripts {
+  
+}

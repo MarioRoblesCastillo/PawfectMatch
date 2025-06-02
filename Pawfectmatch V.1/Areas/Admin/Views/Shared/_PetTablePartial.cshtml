@@ -1,0 +1,222 @@
+﻿@model IEnumerable<Pawfectmatch_V._1.Models.Pet>
+
+@Html.AntiForgeryToken()
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                <input type="checkbox" class="selectAllGroup" />
+            </th>
+            <th>Microchip #</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Breed</th>
+            <th>Age</th>
+            <th>Description</th>
+            <th>Date Posted</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pet in Model)
+        {
+            <tr class="selectable-row"
+                data-id="@pet.Id"
+                data-microchip="@pet.MicrochipNumber?.ToLower()"
+                data-name="@pet.Name.ToLower()"
+                data-breed="@pet.Breed.ToLower()"
+                data-description="@pet.Description?.ToLower()"
+                data-age="@pet.Age"
+                data-posted="@pet.DatePosted.ToString("MMMM dd, yyyy").ToLower()">
+                
+                <td>
+                    <input type="checkbox" class="selectPet" value="@pet.Id" />
+                </td>
+                <td>@pet.MicrochipNumber</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(pet.ImagePath))
+                    {
+                        <img src="@pet.ImagePath" alt="Pet Image" width="100" />
+                    }
+                </td>
+                <td>@pet.Name</td>
+                <td>
+                    @if (pet.PetType == "Cat")
+                    {
+                        <span class="badge bg-info text-dark"><i class="fas fa-cat"></i> Cat</span>
+                    }
+                    else if (pet.PetType == "Dog")
+                    {
+                        <span class="badge bg-warning text-dark"><i class="fas fa-dog"></i> Dog</span>
+                    }
+                </td>
+                <td>@pet.Breed</td>
+                <td>@pet.Age</td>
+                <td>@pet.Description</td>
+                <td>@pet.DatePosted.ToString("MMM dd, yyyy")</td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@pet.Id" class="btn btn-sm btn-warning me-1">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <button class="btn btn-sm btn-danger delete-pet-btn"
+                            data-id="@pet.Id"
+                            data-name="@pet.Name">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.delete-pet-btn').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const petId = this.dataset.id;
+                const petName = this.dataset.name;
+
+                Swal.fire({
+                    title: `Delete ${petName}?`,
+                    text: "This action cannot be undone!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`/Admin/Pets/DeleteConfirmed/${petId}`, {
+                            method: 'POST',
+                            headers: {
+                                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                            }
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted!',
+                                    text: `${petName} has been deleted.`,
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    location.reload(); // Reload to reflect the updated list
+                                });
+                            } else {
+                                Swal.fire('Error', 'Failed to delete the pet.', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    });
+
+     //Select Row
+    document.addEventListener("DOMContentLoaded", function () {
+        let lastCheckedRowIndex = null;
+        let currentFocusedIndex = 0;
+
+        const rows = Array.from(document.querySelectorAll('.selectable-row'));
+        const checkboxes = Array.from(document.querySelectorAll('.selectPet'));
+
+        rows.forEach((row, index) => {
+            // Prevent text selection on Shift + mousedown
+            row.addEventListener('mousedown', function (e) {
+                if (e.shiftKey) {
+                    e.preventDefault();
+                }
+            });
+
+            row.addEventListener('click', function (e) {
+                if (e.target.tagName === 'INPUT' || e.target.closest('a')) return;
+
+                const checkbox = this.querySelector('.selectPet');
+
+                if (e.shiftKey && lastCheckedRowIndex !== null) {
+                    const [start, end] = [lastCheckedRowIndex, index].sort((a, b) => a - b);
+                    for (let i = start; i <= end; i++) {
+                        checkboxes[i].checked = true;
+                        rows[i].classList.add('table-active');
+                    }
+                } else {
+                    checkbox.checked = !checkbox.checked;
+                    this.classList.toggle('table-active', checkbox.checked);
+                    lastCheckedRowIndex = index;
+                }
+
+                updateToolbarVisibility?.();
+                updateTabSelectAllState?.(this.closest('.tab-pane'));
+                updateGlobalSelectAllState?.();
+            });
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (!rows.length) return;
+
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                const direction = e.key === 'ArrowDown' ? 1 : -1;
+                const nextIndex = currentFocusedIndex + direction;
+
+                if (nextIndex >= 0 && nextIndex < rows.length) {
+                    currentFocusedIndex = nextIndex;
+                    rows[currentFocusedIndex].scrollIntoView({ block: 'nearest' });
+
+                    const checkbox = rows[currentFocusedIndex].querySelector('.selectPet');
+
+                    if (e.shiftKey) {
+                        checkbox.checked = true;
+                        rows[currentFocusedIndex].classList.add('table-active');
+                    } else {
+                        checkboxes.forEach(cb => cb.checked = false);
+                        rows.forEach(r => r.classList.remove('table-active'));
+
+                        checkbox.checked = true;
+                        rows[currentFocusedIndex].classList.add('table-active');
+                        lastCheckedRowIndex = currentFocusedIndex;
+                    }
+
+                    updateToolbarVisibility?.();
+                    updateTabSelectAllState?.(rows[currentFocusedIndex].closest('.tab-pane'));
+                    updateGlobalSelectAllState?.();
+                }
+            }
+        });
+    });
+
+
+
+     
+</script>
+
+<style>
+    .selectable-row:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+    }
+
+    .selectable-row.table-active {
+        background-color: #d0ebff !important;
+    }
+
+    .selectable-row:focus-within {
+        outline: 2px dashed #0d6efd;
+    }
+
+    .selectable-row {
+        user-select: none;
+    }
+
+        .selectable-row * {
+            user-select: text; /* Allow text selection inside child elements like inputs or links */
+        }
+</style>
+

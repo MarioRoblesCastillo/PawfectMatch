@@ -1,0 +1,82 @@
+﻿@model Pawfectmatch_V._1.Models.Pet
+@{
+    ViewData["Title"] = "Add New Pet";
+}
+
+<h2 class="mb-3">Add New Pet</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="row g-3">
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-6">
+        <label asp-for="PetType" class="form-label">Pet Type</label>
+        <select asp-for="PetType" class="form-select">
+            <option value="">-- Select Pet Type --</option>
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+        </select>
+        <span asp-validation-for="PetType" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" class="form-control text-capitalize" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Breed" class="form-label">Breed</label>
+        <input asp-for="Breed" class="form-control text-capitalize" />
+        <span asp-validation-for="Breed" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Age" class="form-label">Age</label>
+        <input asp-for="Age" type="number" class="form-control" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Gender" class="form-label">Gender</label>
+        <select asp-for="Gender" class="form-select">
+            <option value="">-- Select Gender --</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Status" class="form-label">Status</label>
+        <select asp-for="Status" class="form-select">
+            <option value="Available">Available</option>
+            <option value="Adopted">Adopted</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control text-capitalize" rows="3"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label class="form-label">Upload Image</label>
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Save Pet
+        </button>
+        <a asp-action="ForAdoption" class="btn btn-secondary ms-2">Cancel</a>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

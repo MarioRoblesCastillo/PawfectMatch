@@ -1,0 +1,91 @@
+﻿<div class="row mb-4 align-items-end">
+    <!-- Search Input -->
+    <div class="col-lg-6 col-md-12 mb-2 mb-lg-0">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search by name, breed, description, microchip #, or date of release (yyyy-mm-dd)..." />
+    </div>
+
+    <!-- Age Range Filter -->
+    <div class="col-lg-3 col-md-6 mb-2 mb-lg-0">
+        <label for="ageRange" class="form-label">Age Filter</label>
+        <input type="range" id="ageRange" class="form-range" min="0" max="25" value="25" />
+        <span id="ageValue" class="d-block">All Ages</span>
+    </div>
+
+    <!-- Buttons -->
+    <div class="col-lg-3 col-md-6 text-lg-end text-md-start mt-3 mt-lg-0">
+        <div class="d-flex flex-wrap justify-content-md-start justify-content-lg-end gap-2">
+            <a asp-area="Admin" asp-controller="Pets" asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add New Pet
+            </a>
+            <a asp-action="ExportAvailableToExcel" class="btn btn-outline-success">
+                <i class="fas fa-file-excel"></i>
+            </a>
+            <a asp-action="ExportAvailableToPdf" class="btn btn-outline-danger">
+                <i class="fas fa-file-pdf"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const ageRange = document.getElementById("ageRange");
+        const ageValue = document.getElementById("ageValue");
+
+        function filterPets() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedAge = parseInt(ageRange.value);
+
+            // Select all pet items in either layout
+            const cards = document.querySelectorAll(".pet-card, .selectable-row");
+
+            ageValue.textContent = selectedAge === 25 ? "All Ages" : `Up to ${selectedAge} years`;
+
+            cards.forEach(card => {
+                const name = card.dataset.name || "";
+                const breed = card.dataset.breed || "";
+                const description = card.dataset.description || "";
+                const microchip = card.dataset.microchip || "";
+                const posted = card.dataset.posted || "";  // For table view
+                const released = card.dataset.released || ""; // For adopted view
+                const age = parseInt(card.dataset.age || "0");
+
+                const matchesText = (
+                    name.includes(searchTerm) ||
+                    breed.includes(searchTerm) ||
+                    description.includes(searchTerm) ||
+                    microchip.includes(searchTerm) ||
+                    posted.includes(searchTerm) ||
+                    released.includes(searchTerm)
+                );
+
+                const matchesAge = selectedAge === 25 || age <= selectedAge;
+
+                card.style.display = matchesText && matchesAge ? "" : "none";
+            });
+        }
+
+        if (searchInput && ageRange) {
+            searchInput.addEventListener("input", filterPets);
+            ageRange.addEventListener("input", filterPets);
+            filterPets(); // run on page load
+        }
+    });
+</script>
+
+<style>
+    .selectable-row:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+    }
+
+    .selectable-row.table-active {
+        background-color: #d0ebff !important;
+    }
+
+    .selectable-row:focus-within {
+        outline: 2px dashed #0d6efd;
+    }
+</style>
+

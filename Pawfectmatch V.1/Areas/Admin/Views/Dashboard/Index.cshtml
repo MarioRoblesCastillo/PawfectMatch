@@ -1,0 +1,69 @@
+﻿<!-- Bootstrap CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    .dashboard-welcome {
+        margin-bottom: 2rem;
+        color: #343a40;
+        font-weight: 600;
+    }
+
+    .card-custom {
+        border-radius: 12px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+        .card-custom .card-body h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        .card-custom .card-body p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+    .bg-adopted {
+        background-color: #28a745 !important;
+    }
+
+    .bg-pending {
+        background-color: #ffc107 !important;
+        color: #212529 !important;
+    }
+
+    .bg-applications {
+        background-color: #dc3545 !important;
+    }
+</style>
+
+<h2 class="dashboard-welcome">Welcome Back, Admin</h2>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-applications card-custom">
+            <div class="card-body text-center">
+                <h3>@ViewBag.TotalApplications</h3>
+                <p>Adoption Requests</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-dark bg-pending card-custom">
+            <div class="card-body text-center">
+                <h3>@ViewBag.TotalPets</h3>
+                <p>Available Pets</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-adopted card-custom">
+            <div class="card-body text-center">
+                <h3>@ViewBag.AdoptedPets</h3>
+                <p>Adopted Pets</p>
+            </div>
+        </div>
+    </div>
+</div>

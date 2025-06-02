@@ -1,0 +1,283 @@
+﻿@model Pawfectmatch_V._1.Helpers.PaginatedList<Pawfectmatch_V._1.Models.Pet>
+
+@{
+    ViewData["Title"] = "Pets for Adoption";
+
+    var petType = ViewData["CurrentPetType"]?.ToString() ?? "Cat";
+}
+@Html.AntiForgeryToken()
+
+<h2>Pets for Adoption</h2>
+
+<partial name="_SearchAndFilter" />
+
+<div id="bulkEditToolbar" class="mb-3" style="display:none; border: 1px solid #ccc; padding: 10px; background: #f9f9f9;">
+    <strong>Bulk Edit Selected Pets:</strong>
+    <div class="row g-2 align-items-center mt-2">
+        <div class="col-auto">
+            <label for="bulkPetType" class="form-label">Type</label>
+            <select id="bulkPetType" class="form-select">
+                <option value="">-- No Change --</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+              
+            </select>
+        </div>
+        <div class="col-auto">
+            <label for="bulkBreed" class="form-label">Breed</label>
+            <input type="text" id="bulkBreed" class="form-control" placeholder="Leave empty to skip" />
+        </div>
+        <div class="col-auto">
+            <label for="bulkAge" class="form-label">Age</label>
+            <input type="number" id="bulkAge" class="form-control" placeholder="Leave empty to skip" min="0" />
+        </div>
+        <div class="col-auto flex-grow-1">
+            <label for="bulkDescription" class="form-label">Description</label>
+            <input type="text" id="bulkDescription" class="form-control" placeholder="Leave empty to skip" />
+        </div>
+        <div class="col-auto">
+            <button id="applyBulkEdit" class="btn btn-success mt-4">Apply Changes</button>
+            <button id="deleteSelectedPets" class="btn btn-danger mt-4">Delete Selected</button>
+            <button id="deselectAllBtn" class="btn btn-outline-secondary me-2 mt-4">
+                <i class="fas fa-xmark"></i> 
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Tabs -->
+<ul class="nav nav-tabs mb-3" id="petTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link @(petType == "Cat" ? "active" : "")" href="@Url.Action("ForAdoption", new { petType = "Cat", page = 1 })">Cats</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link @(petType == "Dog" ? "active" : "")" href="@Url.Action("ForAdoption", new { petType = "Dog", page = 1 })">Dogs</a>
+    </li>
+</ul>
+
+<partial name="_PetTablePartial" model="Model" />
+
+
+@{
+    var startItem = ((Model.PageIndex - 1) * Model.PageSize) + 1;
+    var endItem = startItem + Model.Count - 1;
+}
+<div class="text-center mb-2">
+    <small class="text-muted">
+        Showing @startItem–@endItem of @Model.TotalCount pets
+    </small>
+</div>
+
+
+<!-- Pagination -->
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("ForAdoption", new { petType = petType, page = Model.PageIndex - 1 })">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        }
+
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            if (i == Model.PageIndex)
+            {
+                <li class="page-item active"><span class="page-link">@i</span></li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("ForAdoption", new { petType = petType, page = i })">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("ForAdoption", new { petType = petType, page = Model.PageIndex + 1 })">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled"><span class="page-link">Next</span></li>
+        }
+    </ul>
+</nav>
+
+
+@await Html.PartialAsync("_ToastNotifications")
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+    // Get all pet checkboxes from both tabs
+    function getPetCheckboxes() {
+        return document.querySelectorAll('.selectPet');
+    }
+
+    // Toggle bulk edit toolbar visibility based on selections
+    function updateToolbarVisibility() {
+        const anyChecked = [...getPetCheckboxes()].some(cb => cb.checked);
+        document.getElementById('bulkEditToolbar').style.display = anyChecked ? 'block' : 'none';
+    }
+
+        document.addEventListener('change', function (e) {
+        if (e.target.classList.contains('selectAllGroup')) {
+            const checkboxes = document.querySelectorAll('.selectPet');
+            checkboxes.forEach(cb => cb.checked = e.target.checked);
+            updateToolbarVisibility();
+        }
+
+        if (e.target.classList.contains('selectPet')) {
+            updateToolbarVisibility();
+
+            const selectAllCheckbox = document.querySelector('.selectAllGroup');
+            const allChecked = [...document.querySelectorAll('.selectPet')].every(cb => cb.checked);
+            selectAllCheckbox.checked = allChecked;
+        }
+    });
+
+    // Update selectAll checkbox for the tab
+    function updateTabSelectAllState(tabPane) {
+        const selectAllCheckbox = tabPane.querySelector('.selectAllGroup');
+        const checkboxes = tabPane.querySelectorAll('.selectPet');
+        selectAllCheckbox.checked = [...checkboxes].every(cb => cb.checked);
+    }
+
+    // Apply Bulk Edit button click
+       document.getElementById('applyBulkEdit').addEventListener('click', async () => {
+        const selectedIds = [...document.querySelectorAll('.selectPet:checked')].map(cb => cb.value);
+
+        if (selectedIds.length === 0) {
+            showToast("Select at least one pet.");
+            return;
+        }
+
+        const petType = document.getElementById('bulkPetType').value;
+        const breed = document.getElementById('bulkBreed').value.trim();
+        const age = document.getElementById('bulkAge').value;
+        const description = document.getElementById('bulkDescription').value.trim();
+
+        const updateData = {};
+        if (petType) updateData.petType = petType;
+        if (breed) updateData.breed = breed;
+        if (age !== '') updateData.age = parseInt(age);
+        if (description) updateData.description = description;
+
+        if (Object.keys(updateData).length === 0) {
+            showToast("Please fill at least one field to update.");
+            return;
+        }
+
+        const applyBtn = document.getElementById('applyBulkEdit');
+        applyBtn.disabled = true;
+
+        try {
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            const response = await fetch('/Admin/Pets/BulkEdit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': token
+                },
+                body: JSON.stringify({ petIds: selectedIds, updateFields: updateData })
+            });
+
+            if (response.ok) {
+                showToast("Pets updated successfully.");
+                // Reload after a short delay so the toast can be seen
+                setTimeout(() => location.reload(), 1500);
+            } else {
+                showToast("Failed to update pets.");
+            }
+        } catch (error) {
+            showToast("Error: " + error.message);
+        } finally {
+            applyBtn.disabled = false;
+        }
+    });
+
+    // Initial toolbar update on page load
+    updateToolbarVisibility();
+
+    //Delete Bulk
+        document.getElementById('deleteSelectedPets').addEventListener('click', async () => {
+        const selectedIds = [...document.querySelectorAll('.selectPet:checked')].map(cb => cb.value);
+
+        if (selectedIds.length === 0) {
+            showToast("Select at least one pet to delete.");
+            return;
+        }
+
+        const { isConfirmed } = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to delete the selected pets.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete them!',
+            cancelButtonText: 'Cancel',
+            customClass: {
+                confirmButton: 'btn btn-danger',
+                cancelButton: 'btn btn-secondary ms-2'
+            },
+            buttonsStyling: false
+        });
+
+        if (!isConfirmed) return;
+
+        const deleteBtn = document.getElementById('deleteSelectedPets');
+        deleteBtn.disabled = true;
+
+        try {
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            const response = await fetch('/Admin/Pets/BulkDelete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': token
+                },
+                body: JSON.stringify({ petIds: selectedIds })
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'Selected pets have been deleted.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                setTimeout(() => location.reload(), 1600);
+            } else {
+                Swal.fire('Failed!', 'Could not delete pets.', 'error');
+            }
+        } catch (error) {
+            Swal.fire('Error!', error.message, 'error');
+        } finally {
+            deleteBtn.disabled = false;
+        }
+    });
+
+    //Deselect
+
+    const deselectBtn = document.getElementById('deselectAllBtn');
+    const checkboxes = document.querySelectorAll('.selectPet');
+    const rows = document.querySelectorAll('.selectable-row');
+
+    deselectBtn?.addEventListener('click', function () {
+        checkboxes.forEach(cb => cb.checked = false);
+        rows.forEach(row => row.classList.remove('table-active'));
+
+        updateToolbarVisibility?.();
+        updateTabSelectAllState?.(document.querySelector('.tab-pane.active'));
+        updateGlobalSelectAllState?.();
+    });
+</script>

@@ -1,0 +1,31 @@
+﻿@* Views/Shared/_ToastNotification.cshtml *@
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+    <div id="toastSuccess" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+        <div class="d-flex">
+            <div class="toast-body" id="toastMessage">
+                @TempData["SuccessMessage"]
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showToast(message) {
+        const toastEl = document.getElementById('toastSuccess');
+        const toastBody = document.getElementById('toastMessage');
+        toastBody.textContent = message;
+
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+    }
+
+    // Optional: auto-show if there's a message from TempData
+    document.addEventListener("DOMContentLoaded", () => {
+        const message = document.getElementById('toastMessage').textContent.trim();
+        if (message) {
+            const toast = new bootstrap.Toast(document.getElementById('toastSuccess'));
+            toast.show();
+        }
+    });
+</script>
