@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation; // add this
+using Microsoft.Extensions.Options;
 using Pawfectmatch_V._1.Data;
 using Pawfectmatch_V._1.Models;
 using Rotativa.AspNetCore;
@@ -16,6 +17,7 @@ namespace Pawfectmatch_V._1
             // Add services to the container with Razor runtime compilation enabled
             builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
+            builder.Services.AddRazorPages();
 
             // Configure EF Core with SQLite
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -56,6 +58,8 @@ namespace Pawfectmatch_V._1
             app.MapControllerRoute(
                 name: "areas",
                 pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+
+            app.MapRazorPages();
 
             // Default route
             app.MapControllerRoute(

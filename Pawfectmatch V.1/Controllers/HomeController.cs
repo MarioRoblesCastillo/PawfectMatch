@@ -6,7 +6,22 @@ namespace Pawfectmatch_V._1.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Login", "Auth", new { area = "Admin" });
+            return View(); // Show the Home page
         }
+        public IActionResult FindAPet()
+        {
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
     }
 }

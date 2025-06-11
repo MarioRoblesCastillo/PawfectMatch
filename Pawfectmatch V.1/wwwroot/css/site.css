@@ -29,3 +29,18 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+.btn-pawfect {
+    background-color: #ff5757;
+    border-color: #ff5757;
+    color: #fff;
+}
+
+    .btn-pawfect:hover,
+    .btn-pawfect:focus {
+        background-color: #e04a4a;
+        border-color: #e04a4a;
+        color: #fff;
+    }
+input[type="radio"]:checked {
+    accent-color: #ff5757;
+}

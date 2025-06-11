@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pchdz\\Desktop\\Backup\\ver18\\Pawfectmatch V.1 - Copy\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj": {}
+    "C:\\Users\\AMD\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pchdz\\Desktop\\Backup\\ver18\\Pawfectmatch V.1 - Copy\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj": {
+    "C:\\Users\\AMD\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pchdz\\Desktop\\Backup\\ver18\\Pawfectmatch V.1 - Copy\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
+        "projectUniqueName": "C:\\Users\\AMD\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
         "projectName": "Pawfectmatch V.1",
-        "projectPath": "C:\\Users\\pchdz\\Desktop\\Backup\\ver18\\Pawfectmatch V.1 - Copy\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
-        "packagesPath": "C:\\Users\\pchdz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pchdz\\Desktop\\Backup\\ver18\\Pawfectmatch V.1 - Copy\\Pawfectmatch V.1\\obj\\",
+        "projectPath": "C:\\Users\\AMD\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
+        "packagesPath": "C:\\Users\\AMD\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AMD\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\pchdz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\AMD\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,6 +71,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.5, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             },
             "Rotativa.AspNetCore": {
               "target": "Package",

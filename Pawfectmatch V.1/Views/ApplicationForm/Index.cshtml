@@ -1,0 +1,210 @@
+﻿@{
+    ViewData["Title"] = "Application Form";
+}
+
+<h2 class="mb-4">Application Form</h2>
+
+<form method="post" class="needs-validation" novalidate>
+    <h4>Personal Information</h4>
+    <div class="mb-3">
+        <label for="FullName" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="FullName" name="FullName" required>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-2">
+            <label for="Age" class="form-label">Age</label>
+            <input type="number" class="form-control" id="Age" name="Age" min="0" required>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label d-block">Gender</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="Gender" id="GenderMale" value="Male" required>
+                <label class="form-check-label" for="GenderMale">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="Gender" id="GenderFemale" value="Female">
+                <label class="form-check-label" for="GenderFemale">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="Gender" id="GenderOther" value="Other">
+                <label class="form-check-label" for="GenderOther">Other</label>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="Phone" class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" id="Phone" name="Phone" required>
+    </div>
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="Email" name="Email" required>
+    </div>
+    <div class="mb-3">
+        <label for="Address" class="form-label">Address</label>
+        <input type="text" class="form-control" id="Address" name="Address" required>
+    </div>
+
+    <h4 class="mt-4">Home Information</h4>
+    <div class="mb-3">
+        <label class="form-label d-block">Type of Residence</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="ResidenceType" id="House" value="House" required>
+            <label class="form-check-label" for="House">House</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="ResidenceType" id="Apartment" value="Apartment">
+            <label class="form-check-label" for="Apartment">Apartment</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="ResidenceType" id="Condo" value="Condo">
+            <label class="form-check-label" for="Condo">Condo</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="ResidenceType" id="OtherResidence" value="Other">
+            <label class="form-check-label" for="OtherResidence">Other:</label>
+            <input type="text" class="form-control d-inline-block ms-2" style="width: 150px;" name="OtherResidenceText" id="OtherResidenceText">
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label d-block">Do you own or rent your home?</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="OwnOrRent" id="Own" value="Own" required>
+            <label class="form-check-label" for="Own">Own</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="OwnOrRent" id="Rent" value="Rent">
+            <label class="form-check-label" for="Rent">Rent</label>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label d-block">If renting, does your landlord allow pets?</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="LandlordAllowsPets" id="LandlordYes" value="Yes">
+            <label class="form-check-label" for="LandlordYes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="LandlordAllowsPets" id="LandlordNo" value="No">
+            <label class="form-check-label" for="LandlordNo">No</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="LandlordAllowsPets" id="LandlordNotSure" value="Not sure">
+            <label class="form-check-label" for="LandlordNotSure">Not sure</label>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label d-block">Do you have a secure yard or space for the pet?</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="SecureYard" id="YardYes" value="Yes" required>
+            <label class="form-check-label" for="YardYes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="SecureYard" id="YardNo" value="No">
+            <label class="form-check-label" for="YardNo">No</label>
+        </div>
+    </div>
+
+    <h4 class="mt-4">Pet Experience</h4>
+    <div class="mb-3">
+        <label class="form-label d-block">Do you currently have pets?</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="CurrentlyHavePets" id="HavePetsYes" value="Yes" required>
+            <label class="form-check-label" for="HavePetsYes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="CurrentlyHavePets" id="HavePetsNo" value="No">
+            <label class="form-check-label" for="HavePetsNo">No</label>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="CurrentPetsDetails" class="form-label">If yes, list type(s), age(s), and breed(s):</label>
+        <textarea class="form-control" id="CurrentPetsDetails" name="CurrentPetsDetails" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label d-block">Have you owned pets before?</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="OwnedPetsBefore" id="OwnedBeforeYes" value="Yes" required>
+            <label class="form-check-label" for="OwnedBeforeYes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="OwnedPetsBefore" id="OwnedBeforeNo" value="No">
+            <label class="form-check-label" for="OwnedBeforeNo">No</label>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="PetCareWhenAway" class="form-label">Who will take care of the pet when you are away?</label>
+        <input type="text" class="form-control" id="PetCareWhenAway" name="PetCareWhenAway" required>
+    </div>
+
+    <h4 class="mt-4">Adoption Commitment</h4>
+    <div class="mb-3">
+        <label class="form-label d-block">Are you financially prepared for pet care (vet, food, grooming)?</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="FinanciallyPrepared" id="FinanciallyYes" value="Yes" required>
+            <label class="form-check-label" for="FinanciallyYes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="FinanciallyPrepared" id="FinanciallyNo" value="No">
+            <label class="form-check-label" for="FinanciallyNo">No</label>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label d-block">Are you willing to allow a home visit before/after adoption?</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="AllowHomeVisit" id="HomeVisitYes" value="Yes" required>
+            <label class="form-check-label" for="HomeVisitYes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="AllowHomeVisit" id="HomeVisitNo" value="No">
+            <label class="form-check-label" for="HomeVisitNo">No</label>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label d-block">Are you ready for a 10–15 year commitment for this pet?</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="LongTermCommitment" id="CommitmentYes" value="Yes" required>
+            <label class="form-check-label" for="CommitmentYes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="LongTermCommitment" id="CommitmentNo" value="No">
+            <label class="form-check-label" for="CommitmentNo">No</label>
+        </div>
+    </div>
+
+    <h4 class="mt-4">Signature</h4>
+    <div class="mb-2">
+        <p>
+            I certify that the information I provided is true and complete to the best of my knowledge.<br />
+            I understand that this application does not guarantee adoption.
+        </p>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="Signature" class="form-label">Signature</label>
+            <input type="text" class="form-control" id="Signature" name="Signature" required>
+        </div>
+        <div class="col-md-3">
+            <label for="Date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="Date" name="Date" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-pawfect">Submit Application</button>
+</form>
+
+@section Scripts {
+    <script>
+        // Bootstrap validation
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+}
