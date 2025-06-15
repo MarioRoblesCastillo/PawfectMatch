@@ -1,7 +1,14 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\chococat.png
+wwwroot\images\cookiesdog.png
+wwwroot\images\goldenreddie.png
 wwwroot\images\logo.png
 wwwroot\images\logo2.png
+wwwroot\images\mastercat.png
+wwwroot\images\milodog.png
+wwwroot\images\orangecat.png
+wwwroot\images\polkadogs.png
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map

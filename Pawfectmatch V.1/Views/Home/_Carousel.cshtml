@@ -1,0 +1,150 @@
+﻿﻿@{
+ViewData["Title"] = "Pets for Adoption";
+}
+
+@* Removed: <h1>Image Carousel with Lightbox</h1> *@
+
+<div class="container adoption-section">
+    <h2>PETS AVAILABLE FOR ADOPTION</h2>
+    <p>They Are Waiting for Your Adoption</p>
+
+    <div id="carouselPets" class="carousel slide multi-carousel" data-bs-ride="carousel">
+        <div class="carousel-inner multi-carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-md-3 multi-carousel-item">
+                        <div class="pet-card">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23e0f2f7%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23a7d9ed%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%22text-anchor%3D%22middle%22%20alignment-baseline%3D%22middle%22%3EPET%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Pet Image" class="img-fluid" />
+                            <h5>Dog</h5>
+                            <p class="text-muted">Max</p>
+                            <button type="button" class="btn btn-sm view-pet-btn"
+                                    data-bs-toggle="modal" data-bs-target="#petDetailsModal"
+                                    data-pet-id="001"
+                                    data-pet-name="Max"
+                                    data-pet-breed="Golden Retriever"
+                                    data-pet-age="2 years"
+                                    data-pet-gender="Male">
+                                View Pet
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 multi-carousel-item">
+                        <div class="pet-card">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23e0f2f7%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23a7d9ed%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20alignment-baseline%3D%22middle%22%3EPET%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Pet Image" class="img-fluid" />
+                            <h5>Cat</h5>
+                            <p class="text-muted">Luna</p>
+                            <button type="button" class="btn btn-sm view-pet-btn"
+                                    data-bs-toggle="modal" data-bs-target="#petDetailsModal"
+                                    data-pet-id="002"
+                                    data-pet-name="Luna"
+                                    data-pet-breed="Siamese"
+                                    data-pet-age="1 year"
+                                    data-pet-gender="Female">
+                                View Pet
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 multi-carousel-item">
+                        <div class="pet-card">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23e0f2f7%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23a7d9ed%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20alignment-baseline%3D%22middle%22%3EPET%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Pet Image" class="img-fluid" />
+                            <h5>Bird</h5>
+                            <p class="text-muted">Sky</p>
+                            <button type="button" class="btn btn-sm view-pet-btn"
+                                    data-bs-toggle="modal" data-bs-target="#petDetailsModal"
+                                    data-pet-id="003"
+                                    data-pet-name="Sky"
+                                    data-pet-breed="Parakeet"
+                                    data-pet-age="6 months"
+                                    data-pet-gender="Unknown">
+                                View Pet
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 multi-carousel-item">
+                        <div class="pet-card">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23e0f2f7%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23a7d9ed%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20alignment-baseline%3D%22middle%22%3EPET%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Pet Image" class="img-fluid" />
+                            <h5>Rabbit</h5>
+                            <p class="text-muted">Bunny</p>
+                            <button type="button" class="btn btn-sm view-pet-btn"
+                                    data-bs-toggle="modal" data-bs-target="#petDetailsModal"
+                                    data-pet-id="004"
+                                    data-pet-name="Bunny"
+                                    data-pet-breed="Lionhead"
+                                    data-pet-age="8 months"
+                                    data-pet-gender="Female">
+                                View Pet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col-md-3 multi-carousel-item">
+                        <div class="pet-card">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23e0f2f7%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23a7d9ed%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20alignment-baseline%3D%22middle%22%3EPET%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Pet Image" class="img-fluid" />
+                            <h5>Labrador</h5>
+                            <p class="text-muted">Buddy</p>
+                            <button type="button" class="btn btn-sm view-pet-btn"
+                                    data-bs-toggle="modal" data-bs-target="#petDetailsModal"
+                                    data-pet-id="005"
+                                    data-pet-name="Buddy"
+                                    data-pet-breed="Labrador"
+                                    data-pet-age="3 years"
+                                    data-pet-gender="Male">
+                                View Pet
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 multi-carousel-item">
+                        <div class="pet-card">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23e0f2f7%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23a7d9ed%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20alignment-baseline%3D%22middle%22%3EPET%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Pet Image" class="img-fluid" />
+                            <h5>Siamese</h5>
+                            <p class="text-muted">Whiskers</p>
+                            <button type="button" class="btn btn-sm view-pet-btn"
+                                    data-bs-toggle="modal" data-bs-target="#petDetailsModal"
+                                    data-pet-id="006"
+                                    data-pet-name="Whiskers"
+                                    data-pet-breed="Siamese"
+                                    data-pet-age="5 years"
+                                    data-pet-gender="Female">
+                                View Pet
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 multi-carousel-item">
+                        <div class="pet-card">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23e0f2f7%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23a7d9ed%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20alignment-baseline%3D%22middle%22%3EPET%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Pet Image" class="img-fluid" />
+                            <h5>Poodle</h5>
+                            <p class="text-muted">Fluffy</p>
+                            <button type="button" class="btn btn-sm view-pet-btn"
+                                    data-bs-toggle="modal" data-bs-target="#petDetailsModal"
+                                    data-pet-id="007"
+                                    data-pet-name="Fluffy"
+                                    data-pet-breed="Poodle"
+                                    data-pet-age="4 years"
+                                    data-pet-gender="Female">
+                                View Pet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @* Add more carousel-item divs as needed for additional slides, each containing its own 'row' and 'col-md-3 multi-carousel-item' for pet cards *@
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPets" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselPets" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="see-more-btn-container">
+        <button class="see-more-btn">See More Pets for Adoption</button>
+    </div>
+</div>

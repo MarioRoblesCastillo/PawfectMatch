@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Pawfectmatch_V._1.Models;
 
 namespace Pawfectmatch_V._1.Controllers
 {
@@ -23,5 +25,16 @@ namespace Pawfectmatch_V._1.Controllers
             return View();
         }
 
+        public IActionResult Carousel()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    
     }
 }
