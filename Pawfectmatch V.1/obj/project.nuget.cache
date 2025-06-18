@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J9F+3GIBVHM=",
+  "dgSpecHash": "J/qHg/jeL8g=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Angel Aubrey\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
+  "projectFilePath": "C:\\Users\\Angel Aubrey\\source\\repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Angel Aubrey\\.nuget\\packages\\closedxml\\0.105.0\\closedxml.0.105.0.nupkg.sha512",
     "C:\\Users\\Angel Aubrey\\.nuget\\packages\\closedxml.parser\\2.0.0\\closedxml.parser.2.0.0.nupkg.sha512",

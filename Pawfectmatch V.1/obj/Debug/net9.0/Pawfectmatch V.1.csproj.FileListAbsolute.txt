@@ -1301,7 +1301,6 @@ C:\Users\Angel Aubrey\Source\Repos\PawfectMatch\Pawfectmatch V.1\obj\Debug\net9.
 C:\Users\Angel Aubrey\Source\Repos\PawfectMatch\Pawfectmatch V.1\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\Angel Aubrey\Source\Repos\PawfectMatch\Pawfectmatch V.1\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\Angel Aubrey\Source\Repos\PawfectMatch\Pawfectmatch V.1\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\Angel Aubrey\Source\Repos\PawfectMatch\Pawfectmatch V.1\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\Angel Aubrey\Source\Repos\PawfectMatch\Pawfectmatch V.1\obj\Debug\net9.0\Pawfectm.20E2E209.Up2Date
 C:\Users\Angel Aubrey\Source\Repos\PawfectMatch\Pawfectmatch V.1\obj\Debug\net9.0\Pawfectmatch V.1.dll
 C:\Users\Angel Aubrey\Source\Repos\PawfectMatch\Pawfectmatch V.1\obj\Debug\net9.0\refint\Pawfectmatch V.1.dll

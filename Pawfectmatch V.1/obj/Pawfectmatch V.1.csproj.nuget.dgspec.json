@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Angel Aubrey\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj": {}
+    "C:\\Users\\Angel Aubrey\\source\\repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Angel Aubrey\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj": {
+    "C:\\Users\\Angel Aubrey\\source\\repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Angel Aubrey\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
+        "projectUniqueName": "C:\\Users\\Angel Aubrey\\source\\repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
         "projectName": "Pawfectmatch V.1",
-        "projectPath": "C:\\Users\\Angel Aubrey\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
+        "projectPath": "C:\\Users\\Angel Aubrey\\source\\repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
         "packagesPath": "C:\\Users\\Angel Aubrey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Angel Aubrey\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\obj\\",
+        "outputPath": "C:\\Users\\Angel Aubrey\\source\\repos\\PawfectMatch\\Pawfectmatch V.1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
