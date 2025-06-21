@@ -19,7 +19,7 @@ namespace Pawfectmatch_V._1
 
             // Configure EF Core with SQLite
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite("Data Source=pawfectmatch.db"));
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Configure Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
