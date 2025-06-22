@@ -4,6 +4,6 @@ namespace Pawfectmatch_V._1.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        // Extend if needed
+        public ICollection<AdoptionApplication> ProcessedApplications { get; set; }
     }
 }
