@@ -3,13 +3,23 @@
     public class AdoptionApplication
     {
         public int Id { get; set; }
-        public string PetName { get; set; }
-        public string Breed { get; set; }
+        
+        // Applicant Info
         public string ApplicantName { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public string Status { get; set; } // To Review / Approved / Declined
+
+        // Application Info
         public DateTime SubmittedAt { get; set; }
+        public string ReqStatus { get; set; } // Pending / Approved / Rejected
+
+        // Foreign Key to Pet
+        public int PetId { get; set; }
+        public Pet Pet { get; set; }
+
+        // Foreign Key to Admin
+        public string? AdminId { get; set; }  // If using ASP.NET Identity
+        public ApplicationUser? Admin { get; set; }
     }
 
 }
