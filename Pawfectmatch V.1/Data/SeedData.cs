@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
-using Pawfectmatch_V._1.Models; 
+using Pawfectmatch_V._1.Models;
 
 namespace Pawfectmatch_V._1.Data
 {
@@ -10,6 +10,9 @@ namespace Pawfectmatch_V._1.Data
     {
         public static async Task Initialize(IServiceProvider serviceProvider)
         {
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+            context.Database.EnsureCreated(); // Ensures the database and tables are created
+
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
