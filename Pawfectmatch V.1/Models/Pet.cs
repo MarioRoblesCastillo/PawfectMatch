@@ -37,5 +37,7 @@ namespace Pawfectmatch_V._1.Models
         [DataType(DataType.Date)]
         public DateTime DatePosted { get; set; }
 
+        public ICollection<AdoptionApplication> AdoptionApplications { get; set; }
+
     }
 }
