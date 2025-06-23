@@ -18,7 +18,7 @@
         public Pet Pet { get; set; }
 
         // Foreign Key to Admin
-        public string? AdminId { get; set; }  // If using ASP.NET Identity
+        public string? AdminId { get; set; }  // using ASP.NET Identity
         public ApplicationUser? Admin { get; set; }
     }
 

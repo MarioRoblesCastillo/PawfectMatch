@@ -11,8 +11,7 @@ namespace Pawfectmatch_V._1.Data
 
         public DbSet<Pet> Pets { get; set; }
         public DbSet<AdoptionApplication> AdoptionApplications { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; } // Or Admin if different
-
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; } 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
