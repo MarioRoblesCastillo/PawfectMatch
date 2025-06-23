@@ -7,19 +7,19 @@ namespace Pawfectmatch_V._1.Models
         public int Id { get; set; }
 
         [Required, StringLength(100)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [Required, StringLength(100)]
-        public string Breed { get; set; }
+        public required string Breed { get; set; }
 
         [Range(0, 100)]
         public int Age { get; set; }
 
         [Required]
-        public string Gender { get; set; }
+        public required string Gender { get; set; }
 
         [Required(ErrorMessage = "Pet type is required.")]
-        public string PetType { get; set; }  // e.g., "Dog" or "Cat"
+        public required string PetType { get; set; }  // e.g., "Dog" or "Cat"
 
 
         [StringLength(500)]
@@ -28,7 +28,7 @@ namespace Pawfectmatch_V._1.Models
         public string? ImagePath { get; set; }
 
         [Required]
-        public string Status { get; set; } 
+        public required string Status { get; set; } 
 
         public DateTime? DateOfRelease { get; set; }  
 
@@ -37,7 +37,7 @@ namespace Pawfectmatch_V._1.Models
         [DataType(DataType.Date)]
         public DateTime DatePosted { get; set; }
 
-        public ICollection<AdoptionApplication> AdoptionApplications { get; set; }
+        public ICollection<AdoptionApplication> AdoptionApplications { get; set; } = new List<AdoptionApplication>();
 
     }
 }

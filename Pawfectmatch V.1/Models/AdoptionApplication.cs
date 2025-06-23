@@ -5,17 +5,17 @@
         public int Id { get; set; }
         
         // Applicant Info
-        public string ApplicantName { get; set; }
-        public string Email { get; set; }
-        public string Address { get; set; }
+        public required string ApplicantName { get; set; }
+        public required string Email { get; set; }
+        public required string Address { get; set; }
 
         // Application Info
         public DateTime SubmittedAt { get; set; }
-        public string ReqStatus { get; set; } // Pending / Approved / Rejected
+        public required string ReqStatus { get; set; } // Pending / Approved / Rejected
 
         // Foreign Key to Pet
         public int PetId { get; set; }
-        public Pet Pet { get; set; }
+        public required Pet Pet { get; set; }
 
         // Foreign Key to Admin
         public string? AdminId { get; set; }  // using ASP.NET Identity
