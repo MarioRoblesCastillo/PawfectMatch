@@ -1,2 +1,29 @@
-﻿
+﻿@model List<Pawfectmatch_V._1.Models.AdoptionApplication>
+
 <h2>Application Requests</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Applicant</th>
+            <th>Pet</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var app in Model)
+        {
+            <tr>
+                <td>@app.User?.FullName</td>
+                <td>@app.Pet?.Name</td>
+                <td>@app.ApplicationDate.ToShortDateString()</td>
+                <td>@app.Status</td>
+                <td>
+                    <a asp-action="Form" asp-route-id="@app.Id" class="btn btn-primary btn-sm">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
