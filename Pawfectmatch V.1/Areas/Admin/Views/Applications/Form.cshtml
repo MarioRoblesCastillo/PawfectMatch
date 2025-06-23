@@ -1,3 +1,23 @@
-﻿
+﻿@model Pawfectmatch_V._1.Models.AdoptionApplication
 
-<h2>Application Form</h2>
+<h2>Application Forms</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4>Applicant Information</h4>
+        <p><strong>Name:</strong> @Model.ApplicantName</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Address:</strong> @Model.Address</p>
+
+        <h4 class="mt-4">Pet Applied For</h4>
+        <p><strong>Name:</strong> @Model.Pet?.Name</p>
+        <p><strong>Type:</strong> @Model.Pet?.Type</p>
+        <p><strong>Breed:</strong> @Model.Pet?.Breed</p>
+
+        <h4 class="mt-4">Application Info</h4>
+        <p><strong>Submitted At:</strong> @Model.SubmittedAt</p>
+        <p><strong>Status:</strong> @Model.ReqStatus</p>
+
+        <a asp-action="Requests" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
+</div>
