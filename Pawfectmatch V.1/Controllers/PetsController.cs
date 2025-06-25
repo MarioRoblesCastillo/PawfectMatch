@@ -22,9 +22,56 @@ namespace Pawfectmatch_V._1.Controllers
         }
 
         // GET: Pets
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm = "", string petType = "All", string gender = "All", int page = 1)
         {
-            return View(await _context.Pets.ToListAsync());
+            int pageSize = 9;
+            var query = _context.Pets.AsQueryable();
+
+            // Only show available pets
+            query = query.Where(p => p.Status == "Available");
+
+            // Search
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                query = query.Where(p => p.Name.Contains(searchTerm) || p.Breed.Contains(searchTerm) || p.Description.Contains(searchTerm));
+            }
+
+            // Filter by type
+            if (!string.IsNullOrWhiteSpace(petType) && petType != "All")
+            {
+                query = query.Where(p => p.PetType == petType);
+            }
+
+            // Filter by gender
+            if (!string.IsNullOrWhiteSpace(gender) && gender != "All")
+            {
+                query = query.Where(p => p.Gender == gender);
+            }
+
+            // Order by newest
+            query = query.OrderByDescending(p => p.DatePosted);
+
+            // Pagination
+            var totalCount = await query.CountAsync();
+            var pets = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            // For filter dropdowns
+            var petTypes = await _context.Pets.Select(p => p.PetType).Distinct().ToListAsync();
+
+            // Count available cats and dogs
+            var catCount = await _context.Pets.CountAsync(p => p.Status == "Available" && p.PetType == "Cat");
+            var dogCount = await _context.Pets.CountAsync(p => p.Status == "Available" && p.PetType == "Dog");
+            ViewBag.CatCount = catCount;
+            ViewBag.DogCount = dogCount;
+
+            ViewBag.PetTypes = petTypes;
+            ViewBag.SelectedPetType = petType;
+            ViewBag.SelectedGender = gender;
+            ViewBag.SearchTerm = searchTerm;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+            return View(pets);
         }
 
         // GET: Pets/Details/5
@@ -149,6 +196,15 @@ namespace Pawfectmatch_V._1.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Pets/QuickView/5
+        [AllowAnonymous]
+        public async Task<IActionResult> QuickView(int id)
+        {
+            var pet = await _context.Pets.FirstOrDefaultAsync(p => p.Id == id && p.Status == "Available");
+            if (pet == null) return NotFound();
+            return PartialView("_PetQuickViewModal", pet);
         }
 
         private bool PetExists(int id)

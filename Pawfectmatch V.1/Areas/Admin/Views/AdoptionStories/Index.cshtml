@@ -1,0 +1,86 @@
+@model List<Pawfectmatch_V._1.Models.AdoptionStory>
+@{
+    ViewData["Title"] = "Adoption Story Review";
+    Layout = "../Shared/_Layout.cshtml";
+    var status = ViewBag.CurrentStatus as string ?? "All";
+}
+<partial name="../Shared/_ToastNotifications.cshtml" />
+<div class="container py-4">
+    <h2 class="mb-4">Adoption Story Review</h2>
+    <div class="mb-3">
+        <form method="get" class="d-inline">
+            <select name="status" class="form-select d-inline w-auto" onchange="this.form.submit()">
+                @{
+                    var options = new[] { "All", "Pending", "Approved" };
+                    foreach (var opt in options)
+                    {
+                        var selected = (status == opt) ? " selected=\"selected\"" : "";
+                        @Html.Raw($"<option value=\"{opt}\"{selected}>{opt}</option>")
+                    }
+                }
+            </select>
+        </form>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var story in Model)
+        {
+            <div class="col">
+                <div class="card shadow-sm h-100" tabindex="0" aria-label="Adoption story by @story.Application?.ApplicantName about @story.Application?.Pet?.Name">
+                    @if (!string.IsNullOrEmpty(story.PhotoPath))
+                    {
+                        <img src="@story.PhotoPath" class="card-img-top" alt="Photo of @story.Application?.Pet?.Name for story by @story.Application?.ApplicantName" style="height:180px;object-fit:cover;">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">@story.Title</h5>
+                        <div class="mb-2 text-muted small">By: @story.Application?.ApplicantName | Pet: @story.Application?.Pet?.Name | Posted: @story.DatePosted.ToShortDateString()</div>
+                        <p class="card-text">@story.StoryText.Substring(0, Math.Min(200, story.StoryText.Length))@(story.StoryText.Length > 200 ? "..." : "")</p>
+                        <button class="btn btn-outline-primary btn-sm mt-2 view-story-btn" data-story-id="@story.Id" data-bs-toggle="modal" data-bs-target="#storyDetailsModal" aria-label="View full story by @story.Application?.ApplicantName about @story.Application?.Pet?.Name">View Details</button>
+                        <div class="d-flex gap-2 mt-2">
+                            @if (!story.IsApproved)
+                            {
+                                <form asp-action="Approve" asp-route-id="@story.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-success btn-sm" aria-label="Approve story '@story.Title' by @story.Application?.ApplicantName"><i class="bi bi-check-circle"></i> Approve</button>
+                                </form>
+                                <form asp-action="Reject" asp-route-id="@story.Id" method="post" class="d-inline" onsubmit="return confirm('Reject and delete this story?');">
+                                    <button type="submit" class="btn btn-danger btn-sm" aria-label="Reject story '@story.Title' by @story.Application?.ApplicantName"><i class="bi bi-x-circle"></i> Reject</button>
+                                </form>
+                                <span class="badge bg-warning text-dark align-self-center ms-2">Pending</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success align-self-center">Approved</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info mt-4">No stories found for this filter.</div>
+    }
+</div>
+<!-- Story Details Modal -->
+<div class="modal fade" id="storyDetailsModal" tabindex="-1" aria-labelledby="storyDetailsLabel" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="storyDetailsContent">
+            <!-- Story details will be loaded here -->
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.view-story-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var storyId = this.getAttribute('data-story-id');
+                fetch('/Admin/AdoptionStories/Details/' + storyId)
+                    .then(resp => resp.text())
+                    .then(html => {
+                        document.getElementById('storyDetailsContent').innerHTML = html;
+                    });
+            });
+        });
+    });
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" /> 

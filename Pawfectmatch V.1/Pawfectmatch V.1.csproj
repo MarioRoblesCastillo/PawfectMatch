@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Pawfectmatch_V._1</RootNamespace>
+    <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
+    <EnableDefaultStaticWebAssets>false</EnableDefaultStaticWebAssets>
+    <EnableStaticWebAssets>false</EnableStaticWebAssets>
+    <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +30,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
     <PackageReference Include="Rotativa.AspNetCore" Version="1.4.0" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>

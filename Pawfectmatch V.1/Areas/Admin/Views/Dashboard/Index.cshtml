@@ -1,69 +1,75 @@
-﻿<!-- Bootstrap CSS CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
 
-<style>
-    .dashboard-welcome {
-        margin-bottom: 2rem;
-        color: #343a40;
-        font-weight: 600;
-    }
-
-    .card-custom {
-        border-radius: 12px;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-
-        .card-custom .card-body h3 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0;
-        }
-
-        .card-custom .card-body p {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 0;
-        }
-
-    .bg-adopted {
-        background-color: #28a745 !important;
-    }
-
-    .bg-pending {
-        background-color: #ffc107 !important;
-        color: #212529 !important;
-    }
-
-    .bg-applications {
-        background-color: #dc3545 !important;
-    }
-</style>
-
-<h2 class="dashboard-welcome">Welcome Back, Admin</h2>
-
-<div class="row g-4">
-    <div class="col-md-4">
-        <div class="card text-white bg-applications card-custom">
-            <div class="card-body text-center">
-                <h3>@ViewBag.TotalApplications</h3>
-                <p>Adoption Requests</p>
+<div class="container py-5">
+    <h2 class="dashboard-welcome mb-4" style="color:#ff5757;font-weight:700;">Welcome Back, Admin</h2>
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-applications card-custom h-100">
+                <div class="card-body text-center">
+                    <div style="font-size:2.5rem;"><i class="bi bi-people-fill"></i></div>
+                    <h3>@ViewBag.TotalApplications</h3>
+                    <p>Adoption Requests</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-dark bg-pending card-custom">
-            <div class="card-body text-center">
-                <h3>@ViewBag.TotalPets</h3>
-                <p>Available Pets</p>
+        <div class="col-md-4">
+            <div class="card text-dark bg-pending card-custom h-100">
+                <div class="card-body text-center">
+                    <div style="font-size:2.5rem;"><i class="bi bi-paw-fill"></i></div>
+                    <h3>@ViewBag.TotalPets</h3>
+                    <p>Available Pets</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-white bg-adopted card-custom">
-            <div class="card-body text-center">
-                <h3>@ViewBag.AdoptedPets</h3>
-                <p>Adopted Pets</p>
+        <div class="col-md-4">
+            <div class="card text-white bg-adopted card-custom h-100">
+                <div class="card-body text-center">
+                    <div style="font-size:2.5rem;"><i class="bi bi-heart-fill"></i></div>
+                    <h3>@ViewBag.AdoptedPets</h3>
+                    <p>Adopted Pets</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Add Bootstrap Icons CDN for icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<style>
+.dashboard-welcome {
+    color: #ff5757;
+    font-weight: 700;
+}
+.card-custom {
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(255,87,87,0.08);
+    border: none;
+}
+.bg-adopted {
+    background: linear-gradient(90deg, #28a745 60%, #a7d9ed 100%) !important;
+}
+.bg-pending {
+    background: linear-gradient(90deg, #fffbe5 60%, #ffbaba 100%) !important;
+    color: #222 !important;
+}
+.bg-applications {
+    background: linear-gradient(90deg, #ff5757 60%, #ffbaba 100%) !important;
+}
+.bg-story {
+    background: linear-gradient(90deg, #ffb347 60%, #ff5757 100%) !important;
+    color: #fff !important;
+}
+.card-body h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.card-body p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+</style>

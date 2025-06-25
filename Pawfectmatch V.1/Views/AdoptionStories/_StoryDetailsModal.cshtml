@@ -1,0 +1,21 @@
+@model Pawfectmatch_V._1.Models.AdoptionStory
+<div class="modal-header">
+    <h5 class="modal-title" id="storyDetailsLabel">@Model.Title</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close story details modal"></button>
+</div>
+<div class="modal-body">
+    @if (!string.IsNullOrEmpty(Model.PhotoPath))
+    {
+        <img src="@Model.PhotoPath" alt="Photo of @Model.Application?.Pet?.Name for story by @Model.Application?.ApplicantName" class="img-fluid mb-3" style="max-height:220px;object-fit:cover;border-radius:12px;" />
+    }
+    <div class="mb-2 text-muted small">By: @Model.Application?.ApplicantName | Pet: @Model.Application?.Pet?.Name | Posted: @Model.DatePosted.ToShortDateString()</div>
+    <p class="lead">@Model.StoryText</p>
+</div>
+<script>
+    // Set focus to modal when opened
+    document.addEventListener('shown.bs.modal', function (event) {
+        if (event.target.id === 'storyDetailsModal') {
+            event.target.focus();
+        }
+    });
+</script> 

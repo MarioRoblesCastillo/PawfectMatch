@@ -1,0 +1,41 @@
+@model Pawfectmatch_V._1.Models.AdoptionStory
+@{
+    ViewData["Title"] = "Edit Adoption Story";
+}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg p-4">
+                <h2 class="mb-4 text-center" style="color:#ff5757;font-weight:700;">Edit Your Adoption Story</h2>
+                <form asp-action="EditStory" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ApplicationId" />
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label">Title</label>
+                        <input asp-for="Title" class="form-control" maxlength="100" required />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="StoryText" class="form-label">Your Story</label>
+                        <textarea asp-for="StoryText" class="form-control" rows="6" maxlength="2000" required></textarea>
+                        <span asp-validation-for="StoryText" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Photo (optional)</label>
+                        <input type="file" name="PhotoFile" class="form-control" accept="image/*" />
+                        @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                        {
+                            <div class="mt-2">
+                                <img src="@Model.PhotoPath" alt="Current Photo" style="max-width:150px;max-height:120px;" />
+                                <span class="small text-muted ms-2">Current photo</span>
+                            </div>
+                        }
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                    <a asp-action="Dashboard" class="btn btn-link w-100 mt-2">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="_ValidationScriptsPartial" /> 

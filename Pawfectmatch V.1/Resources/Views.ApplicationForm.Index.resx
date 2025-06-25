@@ -1,0 +1,31 @@
+<root>
+  <data name="Select Pet" xml:space="preserve"><value>Select a Pet</value></data>
+  <data name="Personal Info" xml:space="preserve"><value>Personal Information</value></data>
+  <data name="Home Info" xml:space="preserve"><value>Home Information</value></data>
+  <data name="Pet Experience" xml:space="preserve"><value>Pet Experience</value></data>
+  <data name="Commitment" xml:space="preserve"><value>Adoption Commitment</value></data>
+  <data name="Review" xml:space="preserve"><value>Review &amp; Submit</value></data>
+  <data name="Full Name" xml:space="preserve"><value>Full Name</value></data>
+  <data name="Age" xml:space="preserve"><value>Age</value></data>
+  <data name="Gender" xml:space="preserve"><value>Gender</value></data>
+  <data name="Phone" xml:space="preserve"><value>Phone Number</value></data>
+  <data name="Email" xml:space="preserve"><value>Email Address</value></data>
+  <data name="Address" xml:space="preserve"><value>Address</value></data>
+  <data name="Type of Residence" xml:space="preserve"><value>Type of Residence</value></data>
+  <data name="Own or Rent" xml:space="preserve"><value>Do you own or rent your home?</value></data>
+  <data name="Landlord Allows Pets" xml:space="preserve"><value>If renting, does your landlord allow pets?</value></data>
+  <data name="Secure Yard" xml:space="preserve"><value>Do you have a secure yard or space for the pet?</value></data>
+  <data name="Currently Have Pets" xml:space="preserve"><value>Do you currently have pets?</value></data>
+  <data name="Current Pets Details" xml:space="preserve"><value>If yes, list type(s), age(s), and breed(s):</value></data>
+  <data name="Owned Pets Before" xml:space="preserve"><value>Have you owned pets before?</value></data>
+  <data name="Pet Care When Away" xml:space="preserve"><value>Who will take care of the pet when you are away?</value></data>
+  <data name="Financially Prepared" xml:space="preserve"><value>Are you financially prepared for pet care (vet, food, grooming)?</value></data>
+  <data name="Allow Home Visit" xml:space="preserve"><value>Are you willing to allow a home visit before/after adoption?</value></data>
+  <data name="Long Term Commitment" xml:space="preserve"><value>Are you ready for a 10–15 year commitment for this pet?</value></data>
+  <data name="Signature" xml:space="preserve"><value>Signature</value></data>
+  <data name="Date" xml:space="preserve"><value>Date</value></data>
+  <data name="Submit Application" xml:space="preserve"><value>Submit Application</value></data>
+  <data name="Back" xml:space="preserve"><value>Back</value></data>
+  <data name="Next" xml:space="preserve"><value>Next</value></data>
+  <data name="Skip to main content" xml:space="preserve"><value>Skip to main content</value></data>
+</root> 

@@ -1,8 +1,6 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
-
 
 <section class="hero">
     <div class="blob-container">
@@ -13,10 +11,6 @@
     <div class="hero-content">
         <h1>PawfectMatch</h1>
         <p>SAVE A LIFE. FIND YOUR PERFECT MATCH</p>
-        <div class="search-bar">
-            <input type="text" placeholder="🔍 Find a Pet">
-            <div class="search-blob"></div>
-        </div>
     </div>
 
     <div class="blob-container">
@@ -25,19 +19,19 @@
     </div>
 </section>
 
-<section class="stats">
-    <div class="stat-group">
+<!-- Centered stats and button below hero -->
+<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 40vh;">
+    <div class="stat-group text-center mb-3">
         <h2>300+</h2>
         <p>Cats</p>
         <h2>300+</h2>
         <p>Dogs</p>
-        <button class="adopt-button" data-bs-toggle="modal" data-bs-target="#carouselModal">
-            ADOPT A PET NOW!
-        </button>
     </div>
-    <div class="yellow-blob"></div>
-    <img src="/images/polkadogs.png" alt="Dog and Cat" class="highlight-img">
-</section>
+    <button class="adopt-button" data-bs-toggle="modal" data-bs-target="#carouselModal">
+        ADOPT A PET NOW!
+    </button>
+</div>
+
 <!-- Carousel Modal -->
 <div class="modal fade" id="carouselModal" tabindex="-1" aria-labelledby="carouselModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -92,3 +86,40 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Handle View Pet button click
+            document.querySelectorAll('.view-pet-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    document.getElementById('modalPetId').textContent = btn.getAttribute('data-pet-id');
+                    document.getElementById('modalPetName').textContent = btn.getAttribute('data-pet-name');
+                    document.getElementById('modalPetBreed').textContent = btn.getAttribute('data-pet-breed');
+                    document.getElementById('modalPetAge').textContent = btn.getAttribute('data-pet-age');
+                    document.getElementById('modalPetGender').textContent = btn.getAttribute('data-pet-gender');
+                    // Optionally set image if available
+                    var img = document.getElementById('modalPetImage');
+                    if (btn.closest('.pet-card') && btn.closest('.pet-card').querySelector('img')) {
+                        img.src = btn.closest('.pet-card').querySelector('img').src;
+                    }
+                    // Store pet id for adoption
+                    document.querySelector('.adopt-btn').setAttribute('data-pet-id', btn.getAttribute('data-pet-id'));
+                });
+            });
+
+            // Handle Adopt button click (event delegation for robustness)
+            document.addEventListener('click', function (e) {
+                if (e.target.classList.contains('adopt-btn')) {
+                    // Always get the petId from the modal content
+                    var petId = document.getElementById('modalPetId').textContent.trim();
+                    if (petId && !isNaN(petId) && Number(petId) > 0) {
+                        window.location.href = '/ApplicationForm/Index?petId=' + encodeURIComponent(petId);
+                    } else {
+                        alert('No pet selected.');
+                    }
+                }
+            });
+        });
+    </script>
+}

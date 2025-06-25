@@ -17,15 +17,18 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var totalApplications = _context.AdoptionApplications.Count();
+            var totalApplications = _context.AdoptionApplications.Count(a => a.Status == "To Review");
             var totalPets = _context.Pets.Count();
             var adoptedPets = _context.Pets.Count(p => p.Status == "Adopted");
 
             var availablePets = totalPets - adoptedPets;  // compute available pets
 
+            var pendingStories = _context.AdoptionStories.Count(s => !s.IsApproved);
+
             ViewBag.TotalApplications = totalApplications;
             ViewBag.TotalPets = availablePets; // ipasa na dito ang available pets count
             ViewBag.AdoptedPets = adoptedPets;
+            ViewBag.PendingStories = pendingStories;
 
             return View();
         }

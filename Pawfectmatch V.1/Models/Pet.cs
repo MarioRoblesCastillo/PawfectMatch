@@ -38,6 +38,12 @@ namespace Pawfectmatch_V._1.Models
         public DateTime DatePosted { get; set; }
 
         public ICollection<AdoptionApplication> AdoptionApplications { get; set; }
+        public ICollection<PetImage> PetImages { get; set; }
 
+        public Pet()
+        {
+            PetImages = new List<PetImage>();
+            AdoptionApplications = new List<AdoptionApplication>();
+        }
     }
 }

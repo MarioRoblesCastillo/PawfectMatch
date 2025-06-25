@@ -158,22 +158,64 @@ namespace Pawfectmatch_V._1.Migrations
                     b.Property<string>("AdminId")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("AllowHomeVisit")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ApplicantName")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CurrentlyHavePets")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("FinanciallyPrepared")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LandlordAllowsPets")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LongTermCommitment")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OwnOrRent")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OwnedPetsBefore")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PetCareWhenAway")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("PetId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ResidenceType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SecureYard")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Signature")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SubmittedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -183,6 +225,42 @@ namespace Pawfectmatch_V._1.Migrations
                     b.HasIndex("PetId");
 
                     b.ToTable("AdoptionApplications");
+                });
+
+            modelBuilder.Entity("Pawfectmatch_V._1.Models.AdoptionStory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ApplicationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PhotoPath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StoryText")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
+
+                    b.ToTable("AdoptionStories");
                 });
 
             modelBuilder.Entity("Pawfectmatch_V._1.Models.ApplicationUser", b =>
@@ -301,6 +379,29 @@ namespace Pawfectmatch_V._1.Migrations
                     b.ToTable("Pets");
                 });
 
+            modelBuilder.Entity("Pawfectmatch_V._1.Models.PetImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PetId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("PetImages");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -369,9 +470,33 @@ namespace Pawfectmatch_V._1.Migrations
                     b.Navigation("Pet");
                 });
 
+            modelBuilder.Entity("Pawfectmatch_V._1.Models.AdoptionStory", b =>
+                {
+                    b.HasOne("Pawfectmatch_V._1.Models.AdoptionApplication", "Application")
+                        .WithMany()
+                        .HasForeignKey("ApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Application");
+                });
+
+            modelBuilder.Entity("Pawfectmatch_V._1.Models.PetImage", b =>
+                {
+                    b.HasOne("Pawfectmatch_V._1.Models.Pet", "Pet")
+                        .WithMany("PetImages")
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pet");
+                });
+
             modelBuilder.Entity("Pawfectmatch_V._1.Models.Pet", b =>
                 {
                     b.Navigation("AdoptionApplications");
+
+                    b.Navigation("PetImages");
                 });
 #pragma warning restore 612, 618
         }

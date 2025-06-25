@@ -16,10 +16,18 @@
             <img src="~/images/logo2.png" alt="PawfectMatch Logo">
         </div>
         <nav>
-            <a href="/Home/Index">Home</a>
+            <a href="/">Home</a>
             <a href="/Home/About">About Us</a>
+            <!-- <a href="/Home/FindAPet">Find a Pet</a> -->
+            <a href="/AdoptionStories/Gallery">Adoption Stories</a>
             <a href="/Home/Contact">Contact</a>
         </nav>
+        <form id="langForm" asp-controller="Home" asp-action="SetLanguage" method="post" class="d-inline ms-3">
+            <select name="culture" class="form-select form-select-sm d-inline w-auto" onchange="this.form.submit()" aria-label="Select language">
+                <option value="en" selected>English</option>
+                <option value="es">Español</option>
+            </select>
+        </form>
     </header>
     <div class="container-fluid">
         <main role="main" class="pb-3">
@@ -31,7 +39,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-
+    @await Html.PartialAsync("_ToastNotifications")
 </body>
 </html>
 

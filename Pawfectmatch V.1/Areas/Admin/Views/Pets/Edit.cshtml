@@ -68,18 +68,29 @@
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
-    <div class="col-md-6">
-        <label class="form-label">Upload New Image</label>
-        <input type="file" name="ImageFile" class="form-control" />
+    <div class="col-md-12 mb-3">
+        <label class="form-label">Upload New Images</label>
+        <input type="file" name="ImageFiles" class="form-control" multiple />
+        <small class="text-muted">You can select multiple images. Only new images will be added.</small>
     </div>
 
-    <div class="col-md-8">
-        @if (!string.IsNullOrEmpty(Model.ImagePath))
-        {
-            <label class="form-label d-block">Current Image</label>
-            <img src="@Model.ImagePath" alt="Current Image" width="100" />
-        }
-    </div>
+    @if (Model.PetImages != null && Model.PetImages.Any())
+    {
+        <div class="col-12 mb-3">
+            <label class="form-label d-block">Current Images</label>
+            <div class="d-flex flex-wrap gap-3">
+                @foreach (var img in Model.PetImages.OrderBy(i => i.SortOrder))
+                {
+                    <div class="position-relative" style="display:inline-block;">
+                        <img src="@img.ImagePath" alt="Pet Image" width="100" class="rounded border" />
+                        <form asp-action="DeleteImage" asp-route-id="@img.Id" method="post" class="position-absolute top-0 end-0" style="z-index:2;">
+                            <button type="submit" class="btn btn-sm btn-danger" title="Delete Image" style="position:absolute;top:2px;right:2px;"><i class="bi bi-x"></i></button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    }
 
     <div class="col-12">
         <button type="submit" class="btn btn-success">

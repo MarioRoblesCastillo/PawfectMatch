@@ -1,0 +1,91 @@
+@model Pawfectmatch_V._1.Models.Pet
+<div class="modal-header">
+    <h5 class="modal-title fw-bold">@Model.Name <span class="badge bg-secondary">@Model.PetType</span></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="text-center mb-3">
+        @if (Model.PetImages != null && Model.PetImages.Any())
+        {
+            <div id="petQuickGallery" class="carousel slide mb-3" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @for (int i = 0; i < Model.PetImages.Count; i++)
+                    {
+                        var img = Model.PetImages.ElementAt(i);
+                        <div class="carousel-item @(i == 0 ? "active" : "") fade-scale">
+                            <img src="@img.ImagePath" class="d-block w-100 rounded shadow" style="max-height:260px;object-fit:cover;transition:transform 0.4s, opacity 0.4s;" alt="@Model.Name image @(i+1)" />
+                        </div>
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#petQuickGallery" data-bs-slide="prev" aria-label="Previous image">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#petQuickGallery" data-bs-slide="next" aria-label="Next image">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="d-flex justify-content-center gap-2 mb-2">
+                @for (int i = 0; i < Model.PetImages.Count; i++)
+                {
+                    var img = Model.PetImages.ElementAt(i);
+                    <img src="@img.ImagePath" class="img-thumbnail pet-thumb" style="width:40px;height:40px;object-fit:cover;cursor:pointer;@(i==0 ? "border:2px solid #ff5757;" : "")" data-bs-target="#petQuickGallery" data-bs-slide-to="@i" aria-label="Go to image @(i+1)" />
+                }
+            </div>
+            <style>
+                .carousel-item.fade-scale { transition: opacity 0.4s, transform 0.4s; }
+                .carousel-item.active.fade-scale { opacity: 1; transform: scale(1.04); }
+                .carousel-item.fade-scale:not(.active) { opacity: 0.5; transform: scale(0.96); }
+                .pet-thumb { transition: border 0.2s; }
+                .pet-thumb:hover, .pet-thumb:focus { border:2px solid #ffb347 !important; }
+            </style>
+            <script>
+                // Highlight active thumbnail
+                document.addEventListener('DOMContentLoaded', function () {
+                    var gallery = document.getElementById('petQuickGallery');
+                    if (gallery) {
+                        gallery.addEventListener('slid.bs.carousel', function (e) {
+                            var idx = e.to;
+                            document.querySelectorAll('.pet-thumb').forEach(function (thumb, i) {
+                                thumb.style.border = (i === idx) ? '2px solid #ff5757' : '';
+                            });
+                        });
+                    }
+                });
+            </script>
+        }
+        else
+        {
+            <img src="@(Model.ImagePath ?? "/images/default.jpg")" alt="Photo of @Model.Name the @Model.PetType" class="img-fluid rounded shadow" style="max-height:260px;object-fit:cover;">
+        }
+    </div>
+    <ul class="list-unstyled mb-3">
+        <li><strong>Breed:</strong> @Model.Breed</li>
+        <li><strong>Age:</strong> @Model.Age</li>
+        <li><strong>Gender:</strong> @Model.Gender</li>
+        <li><strong>Status:</strong> @Model.Status</li>
+    </ul>
+    <div class="mb-3">
+        <strong>Description:</strong>
+        <div>@Model.Description</div>
+    </div>
+</div>
+<div class="modal-footer d-flex justify-content-between">
+    <a asp-controller="ApplicationForm" asp-action="Index" asp-route-petId="@Model.Id" class="btn btn-pawfect" aria-label="Adopt @Model.Name the @Model.PetType">Adopt Me</a>
+    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary" aria-label="View full details for @Model.Name the @Model.PetType">View Full Details</a>
+</div>
+<style>
+    .btn-pawfect {
+        background: linear-gradient(90deg, #ffb347 0%, #ff5757 100%);
+        color: #fff;
+        font-weight: 700;
+        border: none;
+        border-radius: 24px;
+        padding: 0.5rem 1.5rem;
+        box-shadow: 0 2px 8px #ffb34744;
+        transition: background 0.2s;
+    }
+    .btn-pawfect:hover, .btn-pawfect:focus {
+        background: linear-gradient(90deg, #ff5757 0%, #ffb347 100%);
+        color: #fff;
+    }
+</style> 
