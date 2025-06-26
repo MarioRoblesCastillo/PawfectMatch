@@ -7271,23 +7271,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\AMD\\.nuget\\packages\\": {},
+    "C:\\Users\\278PH\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AMD\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
+      "projectUniqueName": "C:\\Users\\278PH\\Cursor OOP Repo\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
       "projectName": "Pawfectmatch V.1",
-      "projectPath": "C:\\Users\\AMD\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
-      "packagesPath": "C:\\Users\\AMD\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AMD\\Source\\Repos\\PawfectMatch\\Pawfectmatch V.1\\obj\\",
+      "projectPath": "C:\\Users\\278PH\\Cursor OOP Repo\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
+      "packagesPath": "C:\\Users\\278PH\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\278PH\\Cursor OOP Repo\\PawfectMatch\\Pawfectmatch V.1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\AMD\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\278PH\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
