@@ -27,7 +27,7 @@
         <h2>300+</h2>
         <p>Dogs</p>
     </div>
-    <button class="adopt-button" data-bs-toggle="modal" data-bs-target="#carouselModal">
+    <button class="adopt-button1" data-bs-toggle="modal" data-bs-target="#carouselModal">
         ADOPT A PET NOW!
     </button>
 </div>
@@ -52,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="petDetailsModalLabel">Pet Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <a asp-controller="Home" asp-action="Index" class="btn-close" aria-label="Close"></a>
             </div>
             <div class="modal-body text-center">
                 <div class="pet-modal-image-container">
@@ -68,7 +68,7 @@
                 <button type="button" class="btn btn-primary adopt-btn">ADOPT</button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a asp-controller="Home" asp-action="Index" class="btn-close" aria-label="Close"></a>
             </div>
         </div>
     </div>

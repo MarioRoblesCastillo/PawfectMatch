@@ -70,23 +70,23 @@
         </select>
     </div>
     <div class="col-md-2">
-        <button type="submit" class="btn btn-outline-primary w-100"><i class="bi bi-search"></i> Search</button>
+        <button type="submit" class="btn btn-search w-100"><i class="bi bi-search"></i> Search</button>
     </div>
 </form>
 <div class="container mb-4">
     <div class="row justify-content-center">
         <div class="col-auto text-center">
-            <div class="fw-bold" style="font-size:2.5rem;">@ViewBag.CatCount+</div>
+            <div class="fw-bold" style="font-size:2.5rem;">@ViewBag.CatCount</div>
             <div style="font-size:1.2rem;">Cats</div>
         </div>
         <div class="col-auto text-center">
-            <div class="fw-bold" style="font-size:2.5rem;">@ViewBag.DogCount+</div>
+            <div class="fw-bold" style="font-size:2.5rem;">@ViewBag.DogCount</div>
             <div style="font-size:1.2rem;">Dogs</div>
         </div>
     </div>
     <div class="row justify-content-center mt-3">
         <div class="col-auto">
-            <a href="#petGrid" class="btn btn-pawfect btn-lg px-5" style="font-weight:700;letter-spacing:1px;">ADOPT A PET NOW!</a>
+            <div class="adopt-text">ADOPT A PET NOW!</div>
         </div>
     </div>
 </div>
@@ -99,7 +99,7 @@
 {
     <div class="col">
         <div class="card pet-card h-100 shadow-sm border-0" tabindex="0" aria-label="@pet.Name, @pet.PetType, @pet.Breed, Age @pet.Age">
-            <img src="@(pet.ImagePath ?? "/images/default.jpg")" class="card-img-top" alt="Photo of @pet.Name the @pet.PetType" style="height:220px;object-fit:cover;" loading="lazy">
+                <img src="@(pet.ImagePath ?? "/images/default.jpg")" class="pet-img-circle" alt="Photo of @pet.Name the @pet.PetType" loading="lazy">
             <div class="card-body">
                 <h5 class="card-title fw-bold">@pet.Name <span class="badge bg-secondary">@pet.PetType</span></h5>
                 <p class="card-text mb-1"><strong>Breed:</strong> @pet.Breed</p>
@@ -154,7 +154,23 @@
     .btn-pawfect:hover, .btn-pawfect:focus {
         background: linear-gradient(90deg, #ff5757 0%, #ffb347 100%);
         color: #fff;
+
     }
+
+    .btn-search {
+        background-color: #ff5757;
+        color: white;
+        font-weight: 600;
+        border: none;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+    }
+
+        .btn-search:hover {
+            background-color: #e64848;
+            color: white;
+        }
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
