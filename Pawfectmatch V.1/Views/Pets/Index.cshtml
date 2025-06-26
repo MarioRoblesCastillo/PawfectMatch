@@ -111,7 +111,7 @@
             <div class="card-footer d-flex justify-content-between align-items-center bg-white border-0">
                 <a asp-action="Details" asp-route-id="@pet.Id" class="btn btn-outline-secondary btn-sm" aria-label="View details for @pet.Name the @pet.PetType">Details</a>
                 <a asp-controller="ApplicationForm" asp-action="Index" asp-route-petId="@pet.Id" class="btn btn-pawfect btn-sm" aria-label="Adopt @pet.Name the @pet.PetType">Adopt</a>
-                <button type="button" class="btn btn-info btn-sm ms-2 quick-view-btn" data-pet-id="@pet.Id" aria-label="Quick view for @pet.Name">Quick View</button>
+                
             </div>
         </div>
     </div>
@@ -158,27 +158,4 @@
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-<!-- Pet Quick View Modal -->
-<div class="modal fade" id="petQuickViewModal" tabindex="-1" aria-labelledby="petQuickViewModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content" id="petQuickViewModalContent">
-      <!-- Content loaded via AJAX -->
-    </div>
-  </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.quick-view-btn').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var petId = this.getAttribute('data-pet-id');
-                fetch(`/Pets/QuickView/${petId}`)
-                    .then(response => response.text())
-                    .then(html => {
-                        document.getElementById('petQuickViewModalContent').innerHTML = html;
-                        var modal = new bootstrap.Modal(document.getElementById('petQuickViewModal'));
-                        modal.show();
-                    });
-            });
-        });
-    });
-</script>
+
