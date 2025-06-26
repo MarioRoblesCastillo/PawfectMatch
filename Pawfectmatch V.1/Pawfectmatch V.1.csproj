@@ -6,8 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Pawfectmatch_V._1</RootNamespace>
     <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
-    <EnableDefaultStaticWebAssets>false</EnableDefaultStaticWebAssets>
-    <EnableStaticWebAssets>false</EnableStaticWebAssets>
     <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
   </PropertyGroup>
 

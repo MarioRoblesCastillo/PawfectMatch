@@ -23,12 +23,9 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
 
             var availablePets = totalPets - adoptedPets;  // compute available pets
 
-            var pendingStories = _context.AdoptionStories.Count(s => !s.IsApproved);
-
             ViewBag.TotalApplications = totalApplications;
             ViewBag.TotalPets = availablePets; // ipasa na dito ang available pets count
             ViewBag.AdoptedPets = adoptedPets;
-            ViewBag.PendingStories = pendingStories;
 
             return View();
         }

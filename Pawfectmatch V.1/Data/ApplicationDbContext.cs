@@ -10,7 +10,6 @@ namespace Pawfectmatch_V._1.Data
 
         public DbSet<Pet> Pets { get; set; }
         public DbSet<AdoptionApplication> AdoptionApplications { get; set; }
-        public DbSet<AdoptionStory> AdoptionStories { get; set; }
         public DbSet<PetImage> PetImages { get; set; }
     }
 }

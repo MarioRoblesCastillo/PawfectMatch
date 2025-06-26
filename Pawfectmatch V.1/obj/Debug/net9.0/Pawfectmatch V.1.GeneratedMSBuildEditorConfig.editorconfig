@@ -28,14 +28,6 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/278PH/Cursor OOP Repo/PawfectMatch/Pawfectmatch V.1/Areas/Admin/Views/AdoptionStories/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRvcHRpb25TdG9yaWVzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/278PH/Cursor OOP Repo/PawfectMatch/Pawfectmatch V.1/Areas/Admin/Views/AdoptionStories/_StoryDetailsModal.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRvcHRpb25TdG9yaWVzXF9TdG9yeURldGFpbHNNb2RhbC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/278PH/Cursor OOP Repo/PawfectMatch/Pawfectmatch V.1/Areas/Admin/Views/Applications/Certificate.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXBwbGljYXRpb25zXENlcnRpZmljYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -168,16 +160,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/278PH/Cursor OOP Repo/PawfectMatch/Pawfectmatch V.1/Views/User/EditStory.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0U3RvcnkuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/278PH/Cursor OOP Repo/PawfectMatch/Pawfectmatch V.1/Views/User/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQcm9maWxlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/278PH/Cursor OOP Repo/PawfectMatch/Pawfectmatch V.1/Views/User/ShareStory.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTaGFyZVN0b3J5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/278PH/Cursor OOP Repo/PawfectMatch/Pawfectmatch V.1/Views/_ViewImports.cshtml]
