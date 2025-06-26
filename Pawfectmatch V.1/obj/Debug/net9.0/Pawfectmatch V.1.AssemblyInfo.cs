@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Pawfectmatch V.1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3fbe6da7d3b090bf18b202fcdf130d0b13f3577e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a75c01d6f8401f78eb7bb5b4a9bd45c74f9c8a8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Pawfectmatch V.1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Pawfectmatch V.1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

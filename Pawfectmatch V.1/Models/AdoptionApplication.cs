@@ -1,12 +1,17 @@
 ﻿namespace Pawfectmatch_V._1.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+
     public class AdoptionApplication
     {
         public int Id { get; set; }
 
         // Relationship to Pet
+        [Required]
         public int PetId { get; set; }
-        public Pet Pet { get; set; }
+        [BindNever]
+        public Pet? Pet { get; set; }
 
         public string ApplicantName { get; set; }
         public string Email { get; set; }

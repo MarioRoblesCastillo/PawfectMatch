@@ -238,6 +238,24 @@
 <main id="mainContent" tabindex="-1">
 <form asp-action="Index" method="post" class="needs-validation" novalidate role="form" id="wizardForm">
     <div id="wizardErrorSummary" class="error-summary" style="display:none;" role="alert" aria-live="assertive"></div>
+    <div class="mb-3">
+        <label for="PetId" class="form-label">Select Pet to Adopt</label>
+        <select class="form-select" id="PetId" name="PetId" required>
+            <option value="">-- Select a Pet --</option>
+            @foreach (var pet in pets)
+            {
+                if (Model?.PetId == pet.Id)
+                {
+                    <option value="@pet.Id" selected>@pet.Name (@pet.Breed, @pet.Age, @pet.Gender)</option>
+                }
+                else
+                {
+                    <option value="@pet.Id">@pet.Name (@pet.Breed, @pet.Age, @pet.Gender)</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="PetId" class="text-danger"></span>
+    </div>
     <!-- Step 1: Personal Info -->
     <div class="wizard-step active" data-step="0">
         <h5 class="fw-bold mb-3"><i class="bi bi-person-fill section-icon"></i>Personal Information</h5>
@@ -453,7 +471,10 @@
         <div id="reviewSection" class="mb-4">
             <!-- Review summary will be filled by JS -->
         </div>
+        <input type="hidden" name="Status" value="To Review" />
+        <input type="hidden" id="saveDraftField" name="saveDraft" value="false" />
         <button type="submit" class="btn btn-pawfect w-15">Submit Application</button>
+        <button type="button" class="btn btn-secondary ms-2" id="saveDraftBtn">Save as Draft</button>
     </div>
     <div class="d-flex justify-content-between mt-4">
         <button type="button" class="btn btn-outline-secondary" id="backBtn" style="display:none;">Back</button>
@@ -591,6 +612,8 @@
     document.getElementById('saveDraftBtn').addEventListener('click', function (e) {
         // Remove required attributes for draft save
         form.querySelectorAll('[required]').forEach(f => f.removeAttribute('required'));
-        // Optionally, set a hidden field or use the button's name/value
+        // Set saveDraft to true and submit
+        document.getElementById('saveDraftField').value = 'true';
+        form.submit();
     });
     </script>
