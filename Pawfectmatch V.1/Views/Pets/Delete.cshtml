@@ -1,0 +1,34 @@
+﻿@model Pawfectmatch_V._1.Models.Pet
+
+@{
+    ViewData["Title"] = "Delete Pet";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card pet-card shadow-lg p-4">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-5 text-center">
+                        <img src="@(Model.ImagePath ?? "/images/default.jpg")" class="img-fluid rounded-circle border border-3 mb-3" style="width:180px;height:180px;object-fit:cover;" alt="@Model.Name" />
+                    </div>
+                    <div class="col-md-7">
+                        <h2 class="mb-2" style="color:#ff5757;font-weight:600;">Delete @Model.Name?</h2>
+                        <p class="mb-3">Are you sure you want to <strong>permanently delete</strong> this pet?</p>
+                        <ul class="list-unstyled mb-3">
+                            <li><strong>Breed:</strong> @Model.Breed</li>
+                            <li><strong>Age:</strong> @Model.Age</li>
+                            <li><strong>Gender:</strong> @Model.Gender</li>
+                            <li><strong>Status:</strong> @Model.Status</li>
+                        </ul>
+                        <form asp-action="Delete" class="d-flex gap-3 align-items-center">
+                            <input type="hidden" asp-for="Id" />
+                            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

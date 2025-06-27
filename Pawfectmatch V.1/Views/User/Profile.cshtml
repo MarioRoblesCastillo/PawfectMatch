@@ -1,0 +1,31 @@
+@model Pawfectmatch_V._1.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<h2 class="mb-4" style="color:#ff5757;font-weight:700;">My Profile</h2>
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+}
+<form asp-action="Profile" method="post" class="card shadow-lg p-4" style="max-width:600px;margin:auto;">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <div class="mb-3">
+        <label asp-for="UserName" class="form-label">Full Name</label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-pawfect btn-lg">Save Changes</button>
+    <a asp-action="Dashboard" class="btn btn-outline-secondary btn-lg ms-2">Back to Dashboard</a>
+</form> 

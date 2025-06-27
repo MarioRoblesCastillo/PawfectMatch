@@ -122,8 +122,13 @@
                 Applications
             </a>
             <div class="collapse submenu @(currentController == "Applications" ? "show" : "")" id="applicationsMenu">
-                <a class="nav-link @(currentAction == "Requests" ? "active" : "")" asp-area="Admin" asp-controller="Applications" asp-action="Requests">Application Requests</a>
-                <a class="nav-link @(currentAction == "Form" ? "active" : "")" asp-area="Admin" asp-controller="Applications" asp-action="Form">Application Form</a>
+                <a class="nav-link @(currentAction == "Requests" ? "active" : "")" asp-area="Admin" asp-controller="Applications" asp-action="Requests">
+                    Application Requests
+                    @if (ViewBag.PendingCount != null && (int)ViewBag.PendingCount > 0)
+                    {
+                        <span class="badge bg-warning text-dark ms-2" title="New applications">@ViewBag.PendingCount</span>
+                    }
+                </a>
             </div>
         </nav>
 
@@ -148,30 +153,7 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
-        <div id="toastSuccess" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    @TempData["SuccessMessage"]
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            var toastEl = document.getElementById('toastSuccess');
-            if (toastEl && toastEl.querySelector('.toast-body').textContent.trim() !== "") {
-                const toast = new bootstrap.Toast(toastEl, {
-                    delay: 3000,    // 3 seconds delay
-                    autohide: true
-                });
-                toast.show();
-            }
-        });
-    </script>
+    @await Html.PartialAsync("~/Views/Shared/_ToastNotifications.cshtml")
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

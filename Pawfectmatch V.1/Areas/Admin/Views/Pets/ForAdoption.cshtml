@@ -7,7 +7,12 @@
 }
 @Html.AntiForgeryToken()
 
-<h2>Pets for Adoption</h2>
+<h2 class="mb-4 d-flex justify-content-between align-items-center">
+    Pets for Adoption
+    <a href="/Admin/Pets/Create" class="btn btn-pawfect btn-lg"><i class="bi bi-plus-circle"></i> Add a New Pet</a>
+</h2>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 <partial name="_SearchAndFilter" />
 

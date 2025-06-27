@@ -1,0 +1,81 @@
+﻿@model Pawfectmatch_V._1.Models.Pet
+
+@{
+    ViewData["Title"] = "Edit Pet";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card pet-card shadow-lg p-4">
+                <h2 class="mb-4" style="color:#ff5757;font-weight:600;">Edit Pet</h2>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Name" class="form-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Breed" class="form-label"></label>
+                            <input asp-for="Breed" class="form-control" />
+                            <span asp-validation-for="Breed" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Age" class="form-label"></label>
+                            <input asp-for="Age" class="form-control" />
+                            <span asp-validation-for="Age" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Gender" class="form-label"></label>
+                            <input asp-for="Gender" class="form-control" />
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="PetType" class="form-label"></label>
+                            <input asp-for="PetType" class="form-control" />
+                            <span asp-validation-for="PetType" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="Description" class="form-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ImagePath" class="form-label"></label>
+                            <input asp-for="ImagePath" class="form-control" />
+                            <span asp-validation-for="ImagePath" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Status" class="form-label"></label>
+                            <input asp-for="Status" class="form-control" />
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="DateOfRelease" class="form-label"></label>
+                            <input asp-for="DateOfRelease" class="form-control" />
+                            <span asp-validation-for="DateOfRelease" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="MicrochipNumber" class="form-label"></label>
+                            <input asp-for="MicrochipNumber" class="form-control" />
+                            <span asp-validation-for="MicrochipNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="DatePosted" class="form-label"></label>
+                            <input asp-for="DatePosted" class="form-control" />
+                            <span asp-validation-for="DatePosted" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-between">
+                        <button type="submit" class="btn btn-pawfect btn-lg">Save</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

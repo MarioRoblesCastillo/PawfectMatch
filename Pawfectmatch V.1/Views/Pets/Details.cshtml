@@ -1,0 +1,82 @@
+﻿@model Pawfectmatch_V._1.Models.Pet
+
+@{
+    ViewData["Title"] = "Pet Details";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card pet-card shadow-lg p-4">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-5 text-center">
+                        @if (Model.PetImages != null && Model.PetImages.Any())
+                        {
+                            <div id="petGallery" class="carousel slide mb-3" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @for (int i = 0; i < Model.PetImages.Count; i++)
+                                    {
+                                        var img = Model.PetImages.ElementAt(i);
+                                        <div class="carousel-item @(i == 0 ? "active" : "") fade-scale">
+                                            <img src="@img.ImagePath" class="d-block w-100 rounded border" style="width:220px;height:220px;object-fit:cover;transition:transform 0.4s, opacity 0.4s;" alt="@Model.Name image @(i+1)" />
+                                        </div>
+                                    }
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#petGallery" data-bs-slide="prev" aria-label="Previous image">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#petGallery" data-bs-slide="next" aria-label="Next image">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div class="d-flex justify-content-center gap-2 mb-2">
+                                @for (int i = 0; i < Model.PetImages.Count; i++)
+                                {
+                                    var img = Model.PetImages.ElementAt(i);
+                                    <img src="@img.ImagePath" class="img-thumbnail pet-thumb" style="width:48px;height:48px;object-fit:cover;cursor:pointer;@(i==0 ? "border:2px solid #ff5757;" : "")" data-bs-target="#petGallery" data-bs-slide-to="@i" aria-label="Go to image @(i+1)" />
+                                }
+                            </div>
+                            <style>
+                                .carousel-item.fade-scale { transition: opacity 0.4s, transform 0.4s; }
+                                .carousel-item.active.fade-scale { opacity: 1; transform: scale(1.04); }
+                                .carousel-item.fade-scale:not(.active) { opacity: 0.5; transform: scale(0.96); }
+                                .pet-thumb { transition: border 0.2s; }
+                                .pet-thumb:hover, .pet-thumb:focus { border:2px solid #ffb347 !important; }
+                            </style>
+                            <script>
+                                // Highlight active thumbnail
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    var gallery = document.getElementById('petGallery');
+                                    if (gallery) {
+                                        gallery.addEventListener('slid.bs.carousel', function (e) {
+                                            var idx = e.to;
+                                            document.querySelectorAll('.pet-thumb').forEach(function (thumb, i) {
+                                                thumb.style.border = (i === idx) ? '2px solid #ff5757' : '';
+                                            });
+                                        });
+                                    }
+                                });
+                            </script>
+                        }
+                        else
+                        {
+                            <img src="@(Model.ImagePath ?? "/images/default.jpg")" class="img-fluid rounded-circle border border-3 mb-3" style="width:220px;height:220px;object-fit:cover;" alt="@Model.Name" />
+                        }
+                    </div>
+                    <div class="col-md-7">
+                        <h2 class="mb-2" style="color:#ff5757;font-weight:600;">@Model.Name <span class="badge bg-secondary">@Model.PetType</span></h2>
+                        <p class="mb-1"><strong>Breed:</strong> @Model.Breed</p>
+                        <p class="mb-1"><strong>Age:</strong> @Model.Age</p>
+                        <p class="mb-1"><strong>Gender:</strong> @Model.Gender</p>
+                        <p class="mb-1"><strong>Status:</strong> @Model.Status</p>
+                        <p class="mb-1"><strong>Microchip #:</strong> @Model.MicrochipNumber</p>
+                        <p class="mb-1"><strong>Date Posted:</strong> @Model.DatePosted.ToShortDateString()</p>
+                        <p class="mb-3"><strong>Description:</strong> @Model.Description</p>
+                      
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

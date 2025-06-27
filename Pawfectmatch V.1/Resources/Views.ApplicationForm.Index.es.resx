@@ -1,0 +1,31 @@
+<root>
+  <data name="Select Pet" xml:space="preserve"><value>Seleccionar una mascota</value></data>
+  <data name="Personal Info" xml:space="preserve"><value>Información personal</value></data>
+  <data name="Home Info" xml:space="preserve"><value>Información del hogar</value></data>
+  <data name="Pet Experience" xml:space="preserve"><value>Experiencia con mascotas</value></data>
+  <data name="Commitment" xml:space="preserve"><value>Compromiso de adopción</value></data>
+  <data name="Review" xml:space="preserve"><value>Revisar y enviar</value></data>
+  <data name="Full Name" xml:space="preserve"><value>Nombre completo</value></data>
+  <data name="Age" xml:space="preserve"><value>Edad</value></data>
+  <data name="Gender" xml:space="preserve"><value>Género</value></data>
+  <data name="Phone" xml:space="preserve"><value>Teléfono</value></data>
+  <data name="Email" xml:space="preserve"><value>Correo electrónico</value></data>
+  <data name="Address" xml:space="preserve"><value>Dirección</value></data>
+  <data name="Type of Residence" xml:space="preserve"><value>Tipo de residencia</value></data>
+  <data name="Own or Rent" xml:space="preserve"><value>¿Es propietario o alquila su casa?</value></data>
+  <data name="Landlord Allows Pets" xml:space="preserve"><value>Si alquila, ¿su arrendador permite mascotas?</value></data>
+  <data name="Secure Yard" xml:space="preserve"><value>¿Tiene un patio o espacio seguro para la mascota?</value></data>
+  <data name="Currently Have Pets" xml:space="preserve"><value>¿Actualmente tiene mascotas?</value></data>
+  <data name="Current Pets Details" xml:space="preserve"><value>Si es así, indique tipo(s), edad(es) y raza(s):</value></data>
+  <data name="Owned Pets Before" xml:space="preserve"><value>¿Ha tenido mascotas antes?</value></data>
+  <data name="Pet Care When Away" xml:space="preserve"><value>¿Quién cuidará de la mascota cuando usted no esté?</value></data>
+  <data name="Financially Prepared" xml:space="preserve"><value>¿Está preparado financieramente para el cuidado de la mascota (veterinario, comida, aseo)?</value></data>
+  <data name="Allow Home Visit" xml:space="preserve"><value>¿Está dispuesto a permitir una visita al hogar antes/después de la adopción?</value></data>
+  <data name="Long Term Commitment" xml:space="preserve"><value>¿Está listo para un compromiso de 10-15 años con esta mascota?</value></data>
+  <data name="Signature" xml:space="preserve"><value>Firma</value></data>
+  <data name="Date" xml:space="preserve"><value>Fecha</value></data>
+  <data name="Submit Application" xml:space="preserve"><value>Enviar solicitud</value></data>
+  <data name="Back" xml:space="preserve"><value>Regresar</value></data>
+  <data name="Next" xml:space="preserve"><value>Siguiente</value></data>
+  <data name="Skip to main content" xml:space="preserve"><value>Saltar al contenido principal</value></data>
+</root> 

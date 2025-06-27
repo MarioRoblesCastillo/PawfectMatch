@@ -17,7 +17,7 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var totalApplications = _context.AdoptionApplications.Count();
+            var totalApplications = _context.AdoptionApplications.Count(a => a.Status == "To Review");
             var totalPets = _context.Pets.Count();
             var adoptedPets = _context.Pets.Count(p => p.Status == "Adopted");
 
