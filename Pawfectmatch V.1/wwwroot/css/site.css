@@ -727,7 +727,20 @@ nav a {
     bottom: 0;
     z-index: 1;
 }
-﻿@ {
+
+/* Force Bootstrap green for Approve button */
+.btn-success {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: #fff !important;
+}
+.btn-success:hover, .btn-success:focus {
+    background-color: #157347 !important;
+    border-color: #146c43 !important;
+    color: #fff !important;
+}
+
+@ {
     Layout = null;
 }
 
@@ -835,3 +848,15 @@ nav a {
 </style >
 </head >
 <body >
+
+/* Force green for Approve button inside pet-card */
+.pet-card .btn-success {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: #fff !important;
+}
+.pet-card .btn-success:hover, .pet-card .btn-success:focus {
+    background-color: #157347 !important;
+    border-color: #146c43 !important;
+    color: #fff !important;
+}

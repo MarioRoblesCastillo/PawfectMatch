@@ -15,15 +15,10 @@
 <form method="get" class="mb-3 d-flex align-items-center">
     <label for="statusFilter" class="form-label mb-0 me-2">Filter by Status:</label>
     <select id="statusFilter" name="status" class="form-select w-auto me-2" onchange="this.form.submit()">
-        @if (ViewBag.CurrentStatus == "To Review") {
-            <option value="To Review" selected>To Review</option>
+        @if (ViewBag.CurrentStatus == "Approve") {
+            <option value="Approve" selected>Approve</option>
         } else {
-            <option value="To Review">To Review</option>
-        }
-        @if (ViewBag.CurrentStatus == "Approved") {
-            <option value="Approved" selected>Approved</option>
-        } else {
-            <option value="Approved">Approved</option>
+            <option value="Approve">Approve</option>
         }
         @if (ViewBag.CurrentStatus == "Declined") {
             <option value="Declined" selected>Declined</option>
@@ -60,8 +55,8 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <input type="checkbox" name="selectedIds" value="@app.Id" class="form-check-input me-2 app-checkbox" aria-label="Select application for @app.ApplicantName" />
-                        <span class="badge rounded-pill me-2 fs-6 @(app.Status == "To Review" ? "bg-warning text-dark" : app.Status == "Approved" ? "bg-success text-white" : "bg-danger")">
-                            <i class="bi @(app.Status == "To Review" ? "bi-hourglass-split" : app.Status == "Approved" ? "bi-check-circle-fill" : "bi-x-circle-fill")"></i> @app.Status
+                        <span class="badge rounded-pill me-2 fs-6 @(app.Status == "To Review" ? "bg-warning text-dark" : (app.Status == "Approved" || app.Status == "Approve") ? "bg-success text-white" : "bg-danger")">
+                            <i class="bi @(app.Status == "To Review" ? "bi-hourglass-split" : (app.Status == "Approved" || app.Status == "Approve") ? "bi-check-circle-fill" : "bi-x-circle-fill")"></i> @app.Status
                         </span>
                         <span class="ms-auto text-muted small">@app.SubmittedAt.ToShortDateString()</span>
                     </div>
