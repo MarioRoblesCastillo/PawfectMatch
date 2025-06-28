@@ -1,8 +1,7 @@
-Add HomeController for navigation, ApplicationFormController, and update routing
-
-- Added HomeController to support navigation bar and main site navigation
-- Added ApplicationFormController and related views for application form functionality
-- Updated default route in Program.cs so the Home page is shown first when running the program
-- Admin area remains accessible by entering the URL directly
-
-- Design added and pet carousel (June 15, 2025)
+PawfectMatch is a web-based Pet Adoption System developed using ASP.NET Core and C#. 
+The system aims to simplify and digitize the adoption process for animal shelters and potential 
+pet adopters. It allows users to browse available pets, view detailed profiles, and submit 
+adoption applications. Shelter staff and admins can manage pet listings and process adoption 
+requests through an admin dashboard. The system will demonstrate core Object-Oriented 
+Programming (OOP) principles such as encapsulation, inheritance, abstraction, and 
+polymorphism.
