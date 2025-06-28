@@ -7277,11 +7277,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pchdz\\OneDrive\\Desktop\\PawfectMatch-Final\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
+      "projectUniqueName": "C:\\Users\\pchdz\\OneDrive\\Desktop\\mario1\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
       "projectName": "Pawfectmatch V.1",
-      "projectPath": "C:\\Users\\pchdz\\OneDrive\\Desktop\\PawfectMatch-Final\\PawfectMatch\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
+      "projectPath": "C:\\Users\\pchdz\\OneDrive\\Desktop\\mario1\\Pawfectmatch V.1\\Pawfectmatch V.1.csproj",
       "packagesPath": "C:\\Users\\pchdz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pchdz\\OneDrive\\Desktop\\PawfectMatch-Final\\PawfectMatch\\Pawfectmatch V.1\\obj\\",
+      "outputPath": "C:\\Users\\pchdz\\OneDrive\\Desktop\\mario1\\Pawfectmatch V.1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

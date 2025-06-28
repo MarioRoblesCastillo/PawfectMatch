@@ -41,11 +41,11 @@
         }
     </select>
 </form>
-
 <form id="bulkActionForm" asp-action="BulkUpdateStatus" method="post">
     <div class="mb-3 d-flex align-items-center">
         <input type="checkbox" id="selectAll" class="form-check-input me-2" aria-label="Select all applications" />
         <label for="selectAll" class="form-label mb-0 me-3">Select All</label>
+
         <div id="bulkActionsBar" class="d-none ms-auto">
             <select name="bulkAction" class="form-select d-inline w-auto me-2" aria-label="Bulk action">
                 <option value="">Bulk Action</option>
@@ -64,12 +64,11 @@
                 <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-2">
-                            <input type="checkbox" name="selectedIds" value="@app.Id" class="form-check-input me-2 app-checkbox" aria-label="Select application for @app.ApplicantName" />
-                            <span class="badge rounded-pill me-2 fs-6 @(app.Status == "To Review" ? "bg-warning text-dark" : (app.Status == "Approved" || app.Status == "Approve") ? "bg-success text-white" : "bg-danger")">
-                                <i class="bi @(app.Status == "To Review" ? "bi-hourglass-split" : (app.Status == "Approved" || app.Status == "Approve") ? "bi-check-circle-fill" : "bi-x-circle-fill")"></i> @app.Status
-                            </span>
+                            <input type="checkbox" name="selectedIds" value="@app.Id" class="form-check-input me-2 app-checkbox" />
+                            
                             <span class="ms-auto text-muted small">@app.SubmittedAt.ToShortDateString()</span>
                         </div>
+
                         <h5 class="card-title mb-1">@app.ApplicantName</h5>
                         <p class="mb-1"><strong>Email:</strong> @app.Email</p>
                         <p class="mb-1"><strong>Address:</strong> @app.Address</p>
@@ -108,6 +107,7 @@
         }
     </div>
 </form>
+
 
 <script>
     const selectAll = document.getElementById('selectAll');
