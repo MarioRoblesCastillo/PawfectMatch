@@ -242,20 +242,30 @@
         <label for="PetId" class="form-label">Select Pet to Adopt</label>
         <select class="form-select" id="PetId" name="PetId" required>
             <option value="">-- Select a Pet --</option>
-            @foreach (var pet in pets)
-            {
-                if (Model?.PetId == pet.Id)
+                @foreach (var pet in pets)
                 {
-                    <option value="@pet.Id" selected>@pet.Name (@pet.Breed, @pet.Age, @pet.Gender)</option>
+                    var microchip = pet.MicrochipNumber?.ToLower() ?? "";
+                    if (Model?.PetId == pet.Id)
+                    {
+                        <option value="@pet.Id" data-microchip="@microchip" selected>
+                            @pet.Name (@pet.Breed, @pet.Age, @pet.Gender)
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@pet.Id" data-microchip="@microchip">
+                            @pet.Name (@pet.Breed, @pet.Age, @pet.Gender)
+                        </option>
+                    }
                 }
-                else
-                {
-                    <option value="@pet.Id">@pet.Name (@pet.Breed, @pet.Age, @pet.Gender)</option>
-                }
-            }
         </select>
         <span asp-validation-for="PetId" class="text-danger"></span>
     </div>
+        <div class="mt-2">
+            <label class="form-label">Microchip Number:</label>
+            <div id="microchipDisplay" class="form-control border-bottom border-2" style="border-radius:0;">N/A</div>
+        </div>
+
     <!-- Step 1: Personal Info -->
     <div class="wizard-step active" data-step="0">
         <h5 class="fw-bold mb-3"><i class="bi bi-person-fill section-icon"></i>Personal Information</h5>
@@ -458,24 +468,23 @@
                 <input asp-for="Signature" class="form-control border-bottom border-2" style="border-radius:0;" required />
                 <span asp-validation-for="Signature" class="text-danger"></span>
         </div>
-        <div class="col-md-3">
-                <label asp-for="Date" class="form-label">Date</label>
-                <input asp-for="Date" type="date" class="form-control border-bottom border-2" style="border-radius:0;" required />
-                <span asp-validation-for="Date" class="text-danger"></span>
+                <div class="col-md-3">
+                    <label asp-for="Date" class="form-label">Date</label>
+                    <input asp-for="Date" type="date" class="form-control border-bottom border-2" style="border-radius:0;" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+
+        </div>
+    </div>
+        <!-- Step 5: Review & Submit -->
+        <div class="wizard-step" data-step="4">
+            <h5 class="fw-bold mb-3"><i class="bi bi-clipboard-check section-icon"></i>Review & Submit</h5>
+            <div id="reviewSection" class="mb-4">
+                <!-- Review summary will be filled by JS -->
             </div>
+            <input type="hidden" name="Status" value="To Review" />
+            <button type="submit" class="btn btn-pawfect w-15">Submit Application</button>
         </div>
-    </div>
-    <!-- Step 5: Review & Submit -->
-    <div class="wizard-step" data-step="4">
-        <h5 class="fw-bold mb-3"><i class="bi bi-clipboard-check section-icon"></i>Review & Submit</h5>
-        <div id="reviewSection" class="mb-4">
-            <!-- Review summary will be filled by JS -->
-        </div>
-        <input type="hidden" name="Status" value="To Review" />
-        <input type="hidden" id="saveDraftField" name="saveDraft" value="false" />
-        <button type="submit" class="btn btn-pawfect w-15">Submit Application</button>
-        <button type="button" class="btn btn-secondary ms-2" id="saveDraftBtn">Save as Draft</button>
-    </div>
     <div class="d-flex justify-content-between mt-4">
         <button type="button" class="btn btn-outline-secondary" id="backBtn" style="display:none;">Back</button>
         <button type="button" class="btn btn-pawfect" id="nextBtn">Next</button>
@@ -544,34 +553,48 @@
         }
     });
     function fillReview() {
-        // Fill the review section with a summary of all fields
         const review = document.getElementById('reviewSection');
-        review.innerHTML = '';
-        const fields = [
-            { label: 'Full Name', value: document.querySelector('input[name="ApplicantName"]').value },
-            { label: 'Age', value: document.querySelector('input[name="Age"]').value },
-            { label: 'Gender', value: document.querySelector('input[name="Gender"]:checked')?.value || '' },
-            { label: 'Phone', value: document.querySelector('input[name="Phone"]').value },
-            { label: 'Email', value: document.querySelector('input[name="Email"]').value },
-            { label: 'Address', value: document.querySelector('input[name="Address"]').value },
-            { label: 'Residence Type', value: document.querySelector('input[name="ResidenceType"]:checked')?.value || '' },
-            { label: 'Own or Rent', value: document.querySelector('input[name="OwnOrRent"]:checked')?.value || '' },
-            { label: 'Landlord Allows Pets', value: document.querySelector('input[name="LandlordAllowsPets"]:checked')?.value || '' },
-            { label: 'Secure Yard', value: document.querySelector('input[name="SecureYard"]:checked')?.value || '' },
-            { label: 'Currently Have Pets', value: document.querySelector('input[name="CurrentlyHavePets"]:checked')?.value || '' },
-            { label: 'Current Pets Details', value: document.querySelector('textarea[name="CurrentPetsDetails"]').value },
-            { label: 'Owned Pets Before', value: document.querySelector('input[name="OwnedPetsBefore"]:checked')?.value || '' },
-            { label: 'Pet Care When Away', value: document.querySelector('input[name="PetCareWhenAway"]').value },
-            { label: 'Financially Prepared', value: document.querySelector('input[name="FinanciallyPrepared"]:checked')?.value || '' },
-            { label: 'Allow Home Visit', value: document.querySelector('input[name="AllowHomeVisit"]:checked')?.value || '' },
-            { label: 'Long Term Commitment', value: document.querySelector('input[name="LongTermCommitment"]:checked')?.value || '' },
-            { label: 'Signature', value: document.querySelector('input[name="Signature"]').value },
-            { label: 'Date', value: document.querySelector('input[name="Date"]').value },
-        ];
-        fields.forEach(f => {
-            review.innerHTML += `<div class='mb-2'><strong>${f.label}:</strong> ${f.value}</div>`;
-        });
+        review.innerHTML = `
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4" style="color:#ff5757;"><i class="bi bi-clipboard-check"></i> Application Summary</h5>
+                    <div class="row g-3">
+                    ${
+                        [
+                            { label: 'Full Name', value: document.querySelector('input[name="ApplicantName"]').value },
+                            { label: 'Age', value: document.querySelector('input[name="Age"]').value },
+                            { label: 'Gender', value: document.querySelector('input[name="Gender"]:checked')?.value || '' },
+                            { label: 'Phone', value: document.querySelector('input[name="Phone"]').value },
+                            { label: 'Email', value: document.querySelector('input[name="Email"]').value },
+                            { label: 'Address', value: document.querySelector('input[name="Address"]').value },
+                            { label: 'Residence Type', value: document.querySelector('input[name="ResidenceType"]:checked')?.value || '' },
+                            { label: 'Own or Rent', value: document.querySelector('input[name="OwnOrRent"]:checked')?.value || '' },
+                            { label: 'Landlord Allows Pets', value: document.querySelector('input[name="LandlordAllowsPets"]:checked')?.value || '' },
+                            { label: 'Secure Yard', value: document.querySelector('input[name="SecureYard"]:checked')?.value || '' },
+                            { label: 'Currently Have Pets', value: document.querySelector('input[name="CurrentlyHavePets"]:checked')?.value || '' },
+                            { label: 'Current Pets Details', value: document.querySelector('textarea[name="CurrentPetsDetails"]').value },
+                            { label: 'Owned Pets Before', value: document.querySelector('input[name="OwnedPetsBefore"]:checked')?.value || '' },
+                            { label: 'Pet Care When Away', value: document.querySelector('input[name="PetCareWhenAway"]').value },
+                            { label: 'Financially Prepared', value: document.querySelector('input[name="FinanciallyPrepared"]:checked')?.value || '' },
+                            { label: 'Allow Home Visit', value: document.querySelector('input[name="AllowHomeVisit"]:checked')?.value || '' },
+                            { label: 'Long Term Commitment', value: document.querySelector('input[name="LongTermCommitment"]:checked')?.value || '' },
+                            { label: 'Signature', value: document.querySelector('input[name="Signature"]').value },
+                            { label: 'Date', value: document.querySelector('input[name="Date"]').value },
+                        ].map(f => `
+                            <div class="col-md-6">
+                                <div class="border-bottom pb-2">
+                                    <strong style="color:#ffb347;"><i class="bi bi-check-circle-fill"></i> ${f.label}:</strong><br/>
+                                    <span>${f.value || '<em class="text-muted">Not provided</em>'}</span>
+                                </div>
+                            </div>
+                        `).join('')
+                    }
+                    </div>
+                </div>
+            </div>
+        `;
     }
+
     // Tooltips for labels
     document.querySelectorAll('.form-label[title]').forEach(label => {
         label.addEventListener('mouseenter', function () {
@@ -609,11 +632,21 @@
     // On page load, show first step
     showStep(currentStep);
     // Save for Later disables validation
-    document.getElementById('saveDraftBtn').addEventListener('click', function (e) {
-        // Remove required attributes for draft save
-        form.querySelectorAll('[required]').forEach(f => f.removeAttribute('required'));
-        // Set saveDraft to true and submit
-        document.getElementById('saveDraftField').value = 'true';
-        form.submit();
+ 
+
+    //show microchip
+        document.getElementById('PetId').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var microchip = selectedOption.getAttribute('data-microchip') || 'N/A';
+        document.getElementById('microchipDisplay').textContent = microchip;
     });
+
+    // Optionally, trigger it on page load if a pet is pre-selected
+    window.addEventListener('DOMContentLoaded', function() {
+        var petSelect = document.getElementById('PetId');
+        var selectedOption = petSelect.options[petSelect.selectedIndex];
+        var microchip = selectedOption.getAttribute('data-microchip') || 'N/A';
+        document.getElementById('microchipDisplay').textContent = microchip;
+    });
+
     </script>
