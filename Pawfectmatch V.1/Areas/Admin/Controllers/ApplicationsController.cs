@@ -95,7 +95,7 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
             if (currentUser == null)
                 return Unauthorized();
 
-            // Update application status
+            // Update this application status
             application.Status = newStatus;
             application.AdminId = currentUser.Id;
             application.UpdatedAt = DateTime.Now;
@@ -105,13 +105,31 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
             {
                 application.Pet.Status = "Adopted";
                 application.Pet.DateOfRelease = DateTime.Now;
+
+                //Auto-decline other applications for this pet
+                var otherApplications = await _context.AdoptionApplications
+                    .Where(a => a.PetId == application.PetId && a.Id != application.Id && a.Status != "Declined")
+                    .ToListAsync();
+
+                foreach (var other in otherApplications)
+                {
+                    other.Status = "Declined";
+                    other.AdminId = currentUser.Id;
+                    other.UpdatedAt = DateTime.Now;
+                }
             }
 
-            // If declined, make sure pet is available again
-            if (newStatus == "Declined" && application.Pet != null && application.Pet.Status == "Adopted")
+            // If declined, make pet available again only if no other approved application exists
+            if (newStatus == "Declined" && application.Pet != null)
             {
-                application.Pet.Status = "Available";
-                application.Pet.DateOfRelease = null;
+                bool hasApproved = await _context.AdoptionApplications
+                    .AnyAsync(a => a.PetId == application.PetId && a.Status == "Approved");
+
+                if (!hasApproved)
+                {
+                    application.Pet.Status = "Available";
+                    application.Pet.DateOfRelease = null;
+                }
             }
 
             await _context.SaveChangesAsync();
@@ -119,6 +137,7 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
             TempData["SuccessMessage"] = $"Application status updated to {newStatus} successfully!";
             return RedirectToAction(nameof(Details), new { id = id });
         }
+
 
         // POST: Admin/Applications/BulkUpdateStatus
         [HttpPost]

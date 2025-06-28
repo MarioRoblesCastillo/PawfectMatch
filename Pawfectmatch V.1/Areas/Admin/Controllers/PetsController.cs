@@ -128,9 +128,7 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
         {
             if (id == null) return NotFound();
 
-            var pet = await _context.Pets
-                .Include(p => p.PetImages)
-                .FirstOrDefaultAsync(p => p.Id == id);
+            var pet = await _context.Pets.FindAsync(id);
             if (pet == null) return NotFound();
 
             return View(pet);
@@ -139,14 +137,14 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
         // POST: Admin/Pets/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Pet pet, IFormFile[] ImageFiles)
+        public async Task<IActionResult> Edit(int id, Pet pet, IFormFile? ImageFile)
         {
             if (id != pet.Id)
                 return NotFound();
 
             if (ModelState.IsValid)
             {
-                var existingPet = await _context.Pets.Include(p => p.PetImages).FirstOrDefaultAsync(p => p.Id == id);
+                var existingPet = await _context.Pets.FindAsync(id);
                 if (existingPet == null)
                     return NotFound();
 
@@ -159,6 +157,8 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
                     existingPet.Description = CapitalizeWords(pet.Description);
                     existingPet.Gender = CapitalizeWords(pet.Gender);
                     existingPet.Status = CapitalizeWords(pet.Status);
+
+                    // **Update Age and explicitly mark modified**
                     existingPet.Age = pet.Age;
                     _context.Entry(existingPet).Property(p => p.Age).IsModified = true;
 
@@ -167,31 +167,23 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
                         existingPet.DateOfRelease = DateTime.Now;
                     }
 
-                    // Handle multiple image uploads
-                    if (ImageFiles != null && ImageFiles.Length > 0)
+                    // Handle image upload
+                    if (ImageFile != null && ImageFile.Length > 0)
                     {
                         var uploads = Path.Combine(_env.WebRootPath, "uploads");
                         Directory.CreateDirectory(uploads);
-                        foreach (var file in ImageFiles)
+                        var filePath = Path.Combine(uploads, ImageFile.FileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
                         {
-                            if (file != null && file.Length > 0)
-                            {
-                                var fileName = $"pet_{existingPet.Id}_{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-                                var filePath = Path.Combine(uploads, fileName);
-                                using (var stream = new FileStream(filePath, FileMode.Create))
-                                {
-                                    await file.CopyToAsync(stream);
-                                }
-                                var image = new PetImage
-                                {
-                                    PetId = existingPet.Id,
-                                    ImagePath = "/uploads/" + fileName,
-                                    SortOrder = existingPet.PetImages.Count
-                                };
-                                _context.PetImages.Add(image);
-                            }
+                            await ImageFile.CopyToAsync(stream);
                         }
+
+                        existingPet.ImagePath = "/uploads/" + ImageFile.FileName;
                     }
+                    // Else: retain existingPet.ImagePath (do nothing)
+
+                    // Debug log (optional)
+                    Console.WriteLine($"Updating pet Id={existingPet.Id} Age={existingPet.Age}");
 
                     await _context.SaveChangesAsync();
 
@@ -208,23 +200,11 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
             }
 
             // If we get here, something was invalid
-            // Reload images for the view
-            pet.PetImages = await _context.PetImages.Where(i => i.PetId == pet.Id).ToListAsync();
             return View(pet);
         }
 
-        // POST: Admin/Pets/DeleteImage/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteImage(int id)
-        {
-            var image = await _context.PetImages.FindAsync(id);
-            if (image == null) return NotFound();
-            _context.PetImages.Remove(image);
-            await _context.SaveChangesAsync();
-            TempData["SuccessMessage"] = "Image deleted.";
-            return RedirectToAction("Edit", new { id = image.PetId });
-        }
+
+
 
         // GET: Admin/Pets/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -364,16 +344,16 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
 
         public class BulkEditRequest
         {
-            public List<int> PetIds { get; set; } = new();
-            public UpdateFields UpdateFields { get; set; } = new();
+            public List<int> PetIds { get; set; }
+            public UpdateFields UpdateFields { get; set; }
         }
 
         public class UpdateFields
         {
-            public string? PetType { get; set; }
-            public string? Breed { get; set; }
+            public string PetType { get; set; }
+            public string Breed { get; set; }
             public int? Age { get; set; }
-            public string? Description { get; set; }
+            public string Description { get; set; }
         }
 
         //Bulk Delete
@@ -396,7 +376,7 @@ namespace Pawfectmatch_V._1.Areas.Admin.Controllers
 
         public class BulkDeleteRequest
         {
-            public List<int> PetIds { get; set; } = new();
+            public List<int> PetIds { get; set; }
         }
 
 

@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Pawfectmatch_V._1.Data;
 using Pawfectmatch_V._1.Models;
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 namespace Pawfectmatch_V._1.Controllers
@@ -22,29 +21,28 @@ namespace Pawfectmatch_V._1.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int? id, int? petId)
         {
-            // Always show dropdown for pet selection
-            var availablePets = await _context.Pets.Where(p => p.Status == "Available").OrderBy(p => p.Name).ToListAsync();
-            ViewBag.AvailablePets = availablePets;
-            return View(new AdoptionApplication());
-        }
+            var availablePets = await _context.Pets
+                .Where(p => p.Status == "Available")
+                .OrderBy(p => p.Name)
+                .ToListAsync();
 
-        // Handle form submission with proper backend logic
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(AdoptionApplication application, string saveDraft)
-        {
-            // If saving as draft, skip validation and save as 'Draft'
-            if (!string.IsNullOrEmpty(saveDraft))
+            ViewBag.AvailablePets = availablePets;
+
+            var model = new AdoptionApplication();
+
+            if (petId != null)
             {
-                application.Status = "Draft";
-                application.SubmittedAt = DateTime.Now;
-                _context.AdoptionApplications.Add(application);
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Your application has been saved as a draft. You can finish it later from your dashboard.";
-                ViewBag.AvailablePets = await _context.Pets.Where(p => p.Status == "Available").OrderBy(p => p.Name).ToListAsync();
-                return View(application);
+                model.PetId = petId.Value;
             }
 
+            return View(model);
+        }
+
+        // Handle form submission
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(AdoptionApplication application)
+        {
             if (ModelState.IsValid)
             {
                 try
@@ -84,10 +82,9 @@ namespace Pawfectmatch_V._1.Controllers
                     TempData["SuccessMessage"] = "You've submitted it. Thank you.";
                     return RedirectToAction(nameof(Index));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     ModelState.AddModelError("", "An error occurred while submitting your application. Please try again.");
-                    // Log the exception in a production environment
                     ViewBag.AvailablePets = await _context.Pets.Where(p => p.Status == "Available").OrderBy(p => p.Name).ToListAsync();
                     return View(application);
                 }
@@ -98,6 +95,7 @@ namespace Pawfectmatch_V._1.Controllers
                 .Where(p => p.Status == "Available")
                 .OrderBy(p => p.Name)
                 .ToListAsync();
+
             return View(application);
         }
 
